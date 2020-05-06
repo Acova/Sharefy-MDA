@@ -135,6 +135,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="ListAds.aspx" />
     <Content Include="ListUsers.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ProfileMod.aspx" />
@@ -161,6 +162,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="imageHandler.ashx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -302,6 +304,16 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="imageHandler.ashx.cs">
+      <DependentUpon>imageHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ListAds.aspx.cs">
+      <DependentUpon>ListAds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListAds.aspx.designer.cs">
+      <DependentUpon>ListAds.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListUsers.aspx.cs">
       <DependentUpon>ListUsers.aspx</DependentUpon>
