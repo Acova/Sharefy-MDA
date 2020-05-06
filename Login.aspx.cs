@@ -8,19 +8,19 @@ using System.Web.UI.WebControls;
 
 namespace Sharefy_MDA
 {
-    public partial class UserRegister : System.Web.UI.Page
+    public partial class Login : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             failText.Visible = false;
+            successText.Visible = false;
         }
 
-        protected void create(object sender, EventArgs e)
+        protected void login(object sender, EventArgs e)
         {
             if (checkRequirements())
             {
-                createUser(buildQuery());
-                loginUser(buildLoginSQL());
+                loginUser(buildSQL());
             }
         }
 
@@ -31,7 +31,7 @@ namespace Sharefy_MDA
 
             if(userName.Equals("") || pass.Equals(""))
             {
-                failText.InnerText = "No se han facilitado los campos obligatorios";
+                failText.InnerText = "Debe introducir un usuario y contraseña válidos";
                 failText.Visible = true;
                 return false;
             }
@@ -39,70 +39,17 @@ namespace Sharefy_MDA
             return true;
         }
 
-        protected string buildQuery()
+        protected string buildSQL()
         {
             return buildBase() + buildArgs();
         }
 
         protected string buildBase()
         {
-            return "insert into Usuarios (Cuenta, Clave, NombreCompleto, DNI, Tel, Email, Rol) values (";
-        }
-
-        protected string buildArgs()
-        {
-            var userName = userNameInput.Value;
-            var pass = passwordInput.Value;
-            var name = realNameInput.Value;
-            var dni = dniInput.Value;
-            var tel = phoneNumberInput.Value;
-            var mail = mailInput.Value;
-            return
-                "\"" +
-                userName + "\",\"" +
-                pass + "\",\"" +
-                name + "\",\"" +
-                dni + "\",\"" +
-                tel + "\",\"" +
-                mail + "\",\"" +
-                "usuario" + "\")";
-        }
-
-        protected void createUser(string sqlSentence)
-        {
-            var dbRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
-            var conString = "data source=" + dbRoute;
-
-            using(var db = new SQLiteConnection(conString))
-            {
-                db.Open();
-                using (var cmd = new SQLiteCommand(sqlSentence, db))
-                {
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch
-                    {
-                        failText.InnerText = "Error añadiendo a la base de datos";
-                        failText.Visible = true;
-                    }
-                }
-                db.Close();
-            }
-        }
-
-        protected string buildLoginSQL()
-        {
-            return buildLoginBase() + buildLoginArgs();
-        }
-
-        protected string buildLoginBase()
-        {
             return "select ID, Rol from Usuarios ";
         }
 
-        protected string buildLoginArgs()
+        protected string buildArgs()
         {
             var user = userNameInput.Value;
             var pass = passwordInput.Value;
@@ -120,12 +67,12 @@ namespace Sharefy_MDA
             using (var db = new SQLiteConnection(conString))
             {
                 db.Open();
-                using (var cmd = new SQLiteCommand(sqlCommand, db))
+                using(var cmd = new SQLiteCommand(sqlCommand, db))
                 {
                     var reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        for (var i = 0; i < reader.FieldCount; i++)
+                        for(var i = 0; i < reader.FieldCount; i++)
                         {
                             if (!reader.IsDBNull(i))
                             {
