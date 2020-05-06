@@ -14,6 +14,9 @@ namespace Sharefy_MDA
             fail.Visible = false;
             
             var id = Request.QueryString["id"];
+
+            if(id == null || id.Equals("")) Response.Redirect("~/Default.aspx");
+
             userId = id;
 
             if (!Page.IsPostBack)
@@ -23,6 +26,7 @@ namespace Sharefy_MDA
         protected void modify(object sender, EventArgs e)
         {
             modifyUser(getQuery());
+            Response.Redirect("~/ListUsers.aspx");
         }
 
         protected string getQuery()
@@ -127,7 +131,7 @@ namespace Sharefy_MDA
 
         protected void cancel(object sender, EventArgs e)
         {
-            Response.Redirect("/Profile?profile_id=" + Session["id"]);
+            Response.Redirect("~/ListUsers.aspx");
         }
     }
 }
