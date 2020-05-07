@@ -13,6 +13,7 @@
             <option>Rol</option>
         </select>
         <div class="input-group-append">
+            <asp:Button ID="AddUserButton" class="UserManagerbtn mx-3 btn" Text="Añadir" runat="server" OnClick="addUser"/>
             <asp:Button ID="searchButton" class="UserManagerbtn mx-3 btn" Text="Buscar" runat="server" OnClick="search"/>
             <asp:Button ID="reset" class="UserManagerbtn btn" Text="Resetear" runat="server" OnClick="resetSearch"/>
         </div>

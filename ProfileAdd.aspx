@@ -60,6 +60,13 @@
                            aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
                 </div> 
             </div>
+            <div class="row justify-content-md-center mb-2">
+                <div class="col col-lg-2">Repita su contraseña</div>
+                <div class="col col-lg-2">
+                    <input id="repeatPasswordInput" type="text" class="form-control" placeholder="Repita su contraseñas"
+                           aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
+                </div> 
+            </div>
             <div class="form-check row mx-0 pb-3">
                   <asp:CheckBox ID="adminCheck" runat="server" Checked="false" class="form-check-input"/>
                   <label class="form-check-label" for="adminCheck">Solicitud de administrador</label>
@@ -67,7 +74,7 @@
 
             <div class="row justify-content-md-center mb-2">
                 <div class="col-auto">
-                    <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="Button2" Text="Confirmar" runat="server" OnClick="modify"/>
+                    <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="Button2" Text="Confirmar" runat="server" OnClick="create"/>
                 </div>
             </div>
             <div class="row justify-content-md-center mb-2">

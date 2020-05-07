@@ -33,6 +33,15 @@ namespace Sharefy_MDA
         protected global::System.Web.UI.HtmlControls.HtmlSelect CategorySelectInput;
 
         /// <summary>
+        /// Control AddUserButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AddUserButton;
+
+        /// <summary>
         /// Control searchButton.
         /// </summary>
         /// <remarks>

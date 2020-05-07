@@ -72,5 +72,10 @@ namespace Sharefy_MDA
         {
             fetchData();
         }
+
+        protected void addUser(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ProfileAdd.aspx");
+        }
     }
 }
