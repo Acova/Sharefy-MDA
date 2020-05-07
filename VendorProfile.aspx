@@ -8,7 +8,6 @@
         <p style="margin: 5px">Email: <%= Session["profileEmail"] %> <br/></p>
         
     </div>
-
     <div>
         <div class="text-center">
             Lista de anuncios
