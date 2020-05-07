@@ -11,7 +11,10 @@ namespace Sharefy_MDA
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Session["rol"] == null || Session["rol"].Equals("usuario"))
+            {
+                adminLink.Visible = false;
+            }
         }
     }
 }
