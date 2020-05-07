@@ -33,6 +33,11 @@
                         <asp:LinkButton CssClass="btn UserManagerbtn" ID="LinkButtonEdit" runat="server" CommandName="EditUser" CommandArgument='<%#Eval("ID") %>'>Edit</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Eliminar" SortExpression="">
+                    <ItemTemplate>
+                        <asp:LinkButton CssClass="btn btn-danger" ID="LinkButtonDelete" runat="server" CommandName="DeleteUser" CommandArgument='<%#Eval("ID") %>' OnClientClick="return confirm('¿Desea eliminar este usuario?')">X</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
         </asp:GridView>
     </div>
