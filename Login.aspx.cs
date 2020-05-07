@@ -46,7 +46,7 @@ namespace Sharefy_MDA
 
         protected string buildBase()
         {
-            return "select ID, Rol from Usuarios ";
+            return "select ID, NombreCompleto, Rol from Usuarios ";
         }
 
         protected string buildArgs()
@@ -62,6 +62,7 @@ namespace Sharefy_MDA
         {
             var id = 0;
             var rol = "";
+            var userName = "";
             var route = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
             var conString = "data source=" + route;
             using (var db = new SQLiteConnection(conString))
@@ -84,6 +85,10 @@ namespace Sharefy_MDA
                                 {
                                     rol = reader.GetString(i);
                                 }
+                                if (reader.GetName(i).Equals("NombreCompleto"))
+                                {
+                                    userName = reader.GetString(i);
+                                }
                             }
                         }
                     }
@@ -96,8 +101,7 @@ namespace Sharefy_MDA
                     {
                         Session["id"] = id;
                         Session["rol"] = rol;
-                        System.Diagnostics.Debug.WriteLine("ID de usuario: " + Session["id"]);
-                        System.Diagnostics.Debug.WriteLine("Rol: " + Session["rol"]);
+                        Session["userName"] = userName;
                         Response.Redirect("~/Default.aspx");
                     }
                 }
