@@ -136,6 +136,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ListAds.aspx" />
+    <Content Include="ListCar.aspx" />
     <Content Include="ListUsers.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="ProfileMod.aspx" />
@@ -314,6 +315,13 @@
     </Compile>
     <Compile Include="ListAds.aspx.designer.cs">
       <DependentUpon>ListAds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListCar.aspx.cs">
+      <DependentUpon>ListCar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListCar.aspx.designer.cs">
+      <DependentUpon>ListCar.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListUsers.aspx.cs">
       <DependentUpon>ListUsers.aspx</DependentUpon>
