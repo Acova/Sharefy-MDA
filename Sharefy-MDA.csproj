@@ -138,6 +138,7 @@
     <Content Include="ListAds.aspx" />
     <Content Include="ListUsers.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="ProfileAdd.aspx" />
     <Content Include="ProfileMod.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -328,6 +329,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProfileAdd.aspx.cs">
+      <DependentUpon>ProfileAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProfileAdd.aspx.designer.cs">
+      <DependentUpon>ProfileAdd.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProfileMod.aspx.cs">
       <DependentUpon>ProfileMod.aspx</DependentUpon>
