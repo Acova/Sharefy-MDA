@@ -80,7 +80,7 @@ namespace Sharefy_MDA
                                 }
                             }
 
-                        link = "/Rent.aspx?car_id=" + img;
+                        link = "/AdProfile.aspx?car_id=" + img;
                         deck += NewCard(img, softTitle, title, text, link, precio, puertas, potencia, filters);
                     }
                 }
