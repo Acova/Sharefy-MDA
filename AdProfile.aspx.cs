@@ -23,7 +23,7 @@ namespace Sharefy_MDA
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["id"] == null) Response.Redirect("Login.aspx");
+            if (Session["id"] == null) Response.Redirect("/Login.aspx");
             search();
             if (DateTime.Compare(DateTime.ParseExact(dateFrom, "yyyy-MM-dd", null), td) > 0)
             {
@@ -59,7 +59,7 @@ namespace Sharefy_MDA
             if (searchRents(df, dt)) return;
 
             Session["rent"] = new[] { Request.QueryString["car_id"], Session["id"].ToString(), df, dt, price.ToString() };
-            Response.Redirect("/Payment");
+            Response.Redirect("/Rent.aspx");
         }
 
         protected bool searchRents(string df, string dt)
@@ -70,6 +70,7 @@ namespace Sharefy_MDA
         protected void search()
         {
             var carID = Request.QueryString["car_id"];
+            if (carID == null) Response.Redirect("/ListAds.aspx");
             fillData("select * from Coches Where ID ='" + carID + "'");
         }
 
@@ -200,54 +201,55 @@ namespace Sharefy_MDA
         protected string showData(string ownId, string img, string softTitle, string text, string plate, string dateF, string dateT,
             string carM, string model, int power, int doors, string type, int price)
         {
-            return "<div class=\"my-2 mx-auto p-relative bg-white\" style=\"width: 100%;\">" +
-                   "<img class=\"img\" src=\"" + "imageHandler.ashx?id=" + img + "\" alt=\"Man with backpack\"" +
-                   "class=\"d-block w-full\">" +
-                   "<div class=\"px-2 py-2\">"
-                   + "<p class=\"mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px\">" + softTitle +
-                   "</p>"
-                   + "<a class=\"mb-1\" href=VendorProfile?profile_id=" + ownId + ">Perfil propietario</a>" +
-                   "<p class=\"mb-1\">" + text + "</p>" +
-                   "</div>" +
-                   "</div>" +
-                   "<div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Matrícula: </div>" +
-                   "<p class=\"col-md-auto\">" + plate + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Marca: </div>" +
-                   "<p class=\"col-md-auto\">" + carM + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Modelo: </div>" +
-                   "<p class=\"col-md-auto\">" + model + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Potencia:</div>" +
-                   "<p class=\"col-md-auto\">" + power + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Nº de Puertas: </div>" +
-                   "<p class=\"col-md-auto\">" + doors + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Tipo de Coche: </div>" +
-                   "<p class=\"col-md-auto\">" + type + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Disponible Desde: </div>" +
-                   "<p class=\"col-md-auto\">" + dateF + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Hasta: </div>" +
-                   "<p class=\"col-md-auto\">" + dateT + "</p>" +
-                   "</div>"
-                   + "<div class=\"row\">" +
-                   "<div class=\"col-md-auto\">Precio por dia: </div>" +
-                   "<p class=\"col-md-auto\">" + price + "€ </p>" +
-                   "</div>"
-                   + "</div>";
+            return "<div class=\"my-2 mx-auto position-relative bg-white\" style=\"width: 100%;\">"
+                + "<div style=\"height: 400px; overflow: hidden center-block\">"
+                + "<img src=\"" + "imageHandler.ashx?id=" + img + "\" alt=\"Man with backpack\" class=\"img-responsive h-100 center-block\">"
+                + "</div>"
+                + "<div class=\"px-2 py-2\">"
+                + "<p class=\"mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px\">" + softTitle +
+                "</p>"
+                + "<a class=\"mb-1\" href=VendorProfile?profile_id=" + ownId + ">Perfil propietario</a>" +
+                "<p class=\"mb-1\">" + text + "</p>" +
+                "</div>" +
+                "</div>" +
+                "<div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Matrícula: </div>" +
+                "<p class=\"col-md-auto\">" + plate + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Marca: </div>" +
+                "<p class=\"col-md-auto\">" + carM + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Modelo: </div>" +
+                "<p class=\"col-md-auto\">" + model + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Potencia:</div>" +
+                "<p class=\"col-md-auto\">" + power + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Nº de Puertas: </div>" +
+                "<p class=\"col-md-auto\">" + doors + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Tipo de Coche: </div>" +
+                "<p class=\"col-md-auto\">" + type + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Disponible Desde: </div>" +
+                "<p class=\"col-md-auto\">" + dateF + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Hasta: </div>" +
+                "<p class=\"col-md-auto\">" + dateT + "</p>" +
+                "</div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Precio por dia: </div>" +
+                "<p class=\"col-md-auto\">" + price + "€ </p>" +
+                "</div>"
+                + "</div>";
         }
 
         protected void needData()
