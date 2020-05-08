@@ -31,7 +31,7 @@ namespace Sharefy_MDA
         protected void confirmPayment(object sender, EventArgs e)
         {
             rentCar();
-            Response.Redirect("/ListAds.aspx");
+            Response.Redirect("/User.aspx");
         }
 
         private void rentCar()
