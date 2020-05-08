@@ -15,6 +15,15 @@ namespace Sharefy_MDA
     {
 
         /// <summary>
+        /// Control failText.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl failText;
+
+        /// <summary>
         /// Control nameInput.
         /// </summary>
         /// <remarks>
@@ -69,12 +78,21 @@ namespace Sharefy_MDA
         protected global::System.Web.UI.HtmlControls.HtmlInputText emailInput;
 
         /// <summary>
-        /// Control editButton.
+        /// Control confirmButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button editButton;
+        protected global::System.Web.UI.WebControls.Button confirmButton;
+
+        /// <summary>
+        /// Control cancelButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button cancelButton;
     }
 }
