@@ -1,20 +1,18 @@
-﻿using Microsoft.Ajax.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data.SQLite;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SQLite;
 
 namespace Sharefy_MDA
 {
-    public partial class User : System.Web.UI.Page
+    public partial class UserConf : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["id"] == null)
+            if (Session["id"] == null)
             {
                 Response.Redirect("~/Default.aspx");
             }
@@ -26,14 +24,14 @@ namespace Sharefy_MDA
             var route = HttpContext.Current.Server.MapPath(@"\BDCoches.db");
             var connnectionString = "data source=" + route;
 
-            using(var db = new SQLiteConnection(connnectionString))
+            using (var db = new SQLiteConnection(connnectionString))
             {
                 db.Open();
                 var cmd = new SQLiteCommand("SELECT * FROM Usuarios WHERE ID=" + Session["id"], db);
                 var reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    for(var i = 0; i < reader.FieldCount; i++)
+                    for (var i = 0; i < reader.FieldCount; i++)
                     {
                         if (!reader.IsDBNull(i))
                         {
@@ -63,9 +61,29 @@ namespace Sharefy_MDA
             }
         }
 
-        protected void editUser(object sender, EventArgs e)
+        protected void saveChanges(object sender, EventArgs e)
         {
-            Response.Redirect("~/UserConf.aspx");
+            modifyUser(buildQuery());
+        }
+
+        protected void modifyUser(string query)
+        {
+
+        }
+
+        protected string buildQuery()
+        {
+            return buildBase() + buildValues();
+        }
+
+        protected string buildBase()
+        {
+            return "UPDATE Usuarios SET ";
+        }
+
+        protected string buildValues()
+        {
+
         }
     }
 }

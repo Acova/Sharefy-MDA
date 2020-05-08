@@ -264,6 +264,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="User.aspx" />
+    <Content Include="UserConf.aspx" />
     <Content Include="UserRegister.aspx" />
     <Content Include="VendorProfile.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -367,6 +368,13 @@
     </Compile>
     <Compile Include="User.aspx.designer.cs">
       <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserConf.aspx.cs">
+      <DependentUpon>UserConf.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserConf.aspx.designer.cs">
+      <DependentUpon>UserConf.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserRegister.aspx.cs">
       <DependentUpon>UserRegister.aspx</DependentUpon>
