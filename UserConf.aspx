@@ -2,6 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h2 class="text-center">Configuración del perfil</h2>
 
+    <div id="failText" class="alert alert-danger" role="alert" runat="server">
+
+    </div> 
+
     <div class="justify-content-md-center">
         <div class="form-group row justify-content-md-center">
             <label for="nameInput" class="col-sm-2 col-form-label">Nombre de usuario:</label>
@@ -46,9 +50,12 @@
         </div>
 
         <div class="row justify-content-md-center mb-2">
-                <div class="col-auto">
-                    <asp:Button CssClass="btn btn-primary" type="button" ID="editButton" Text="Guardar" runat="server"/>
-                </div>
+            <div class="col-auto">
+                <asp:Button CssClass="btn btn-primary" type="button" ID="confirmButton" Text="Guardar" runat="server" OnClick="saveChanges" />
             </div>
+            <div class="col-auto">
+                <asp:Button CssClass="btn btn-danger" type="button" ID="cancelButton" Text="Cancelar" runat="server" OnClick="cancel" />
+            </div>
+        </div>
     </div>
 </asp:Content>
