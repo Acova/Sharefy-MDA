@@ -50,14 +50,15 @@ namespace Sharefy_MDA
         private static string GetBase()
         {
             return
-                "insert into Coches (IDPropietario , Matricula, Datos, Inicio, Fin, Imagen, Ciudad, Marca, Modelo, Potencia, Puertas, Tipo, Precio) values (";
+                "insert into Coches (IDPropietario , Matricula, Datos, Inicio, Fin, Imagen, Ciudad, Marca, Modelo, Potencia, Puertas, Tipo, Precio, Condiciones) values (";
         }
 
         private static string GetValues()
         {
             return "@userId" + "," + "@plate" + "," + "@data" + "," + "@initDate" + "," + "@endDate" + "," + "@img" +
                    "," + "@city" + "," + "@brand" + "," + "@model" + "," + "@power" + "," + "@doors" + "," + "@type" +
-                   "," + "@price" + ")";
+                   "," + "@price" +
+                   "," + "@condition" + ")";
         }
 
         private bool CheckRequirements()
@@ -72,6 +73,7 @@ namespace Sharefy_MDA
             var power = potenciaInput.Value;
             var doors = puertasInput.Value;
             var price = precioInput.Value;
+
 
             if (plate.Equals("") || data.Equals("") || initDate.Equals("") || city.Equals("") || brand.Equals("") ||
                 model.Equals("") || power.Equals("") || doors.Equals("") || price.Equals(""))
@@ -118,6 +120,8 @@ namespace Sharefy_MDA
             var doors = puertasInput.Value;
             var price = precioInput.Value;
             var imag = Image.FromStream(flImage.PostedFile.InputStream);
+            var condition = adicionalesInput.Value;
+            
 
             var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
             var connstring = "data source=" + relativeRoute;
@@ -143,6 +147,8 @@ namespace Sharefy_MDA
                         cmd.Parameters.Add("@doors", DbType.Int32).Value = doors;
                         cmd.Parameters.Add("@type", DbType.String).Value = type;
                         cmd.Parameters.Add("@price", DbType.Int32).Value = price;
+                        cmd.Parameters.Add("@condition", DbType.String).Value = condition;
+
                         cmd.ExecuteNonQuery();
                         success.Visible = true;
                     }
