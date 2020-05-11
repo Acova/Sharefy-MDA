@@ -80,7 +80,7 @@ namespace Sharefy_MDA
                                 }
                             }
 
-                        link = "/Rent.aspx?car_id=" + img;
+                        link = "/AdProfile.aspx?car_id=" + img;
                         deck += NewCard(img, softTitle, title, text, link, precio, puertas, potencia, filters);
                     }
                 }
@@ -93,10 +93,10 @@ namespace Sharefy_MDA
         protected string NewCard(string img, string softTitle, string title, string text, string link, string precio,
             string puertas, string potencia, string filters)
         {
-            return "<div class=\"col-4 my-2 mx-auto position-relative bg-white \" style=\"overflow: hidden; border-radius: 2px;\">"
-                   + "<div style=\"height: 100%; width: 100%; box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.41);\">"
+            return "<div class=\"col-4 my-2 mx-auto position-relative bg-white \">"
+                   + "<div style=\"height: 100%; width: 100%; box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.41); border-radius: 2px;\">"
                 + "<div style=\"height: 300px; overflow: hidden\">"
-                   +"<img src=\"" + "imageHandler.ashx?id=" + img + "\" alt=\"Man with backpack\" class=\"w-100 h-auto\">"
+                   +"<img src=\"" + "imageHandler.ashx?id=" + img + "\" alt=\"Man with backpack\" class=\"img-responsive w-100\">"
                    + "</div>"
                    + "<div class=\"px-2 py-2\"><p class=\"mb-0 small font-weight-medium text-uppercase mb-1 text-muted lts-2px\">" +
                    softTitle + "</p>"
