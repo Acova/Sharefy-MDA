@@ -13,10 +13,25 @@ namespace Sharefy_MDA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["id"] == null) Response.Redirect("/Login.aspx");
-
+            var cs = Page.ClientScript;
+            payModeSelect.Attributes.Add("onchange", cs.GetPostBackEventReference(payModeSelect, payModeSelect.ID));
+            creditCard.Visible = false;
+            fail.Visible = false;
             getTotal();
         }
-
+        protected void showForm(object sender, EventArgs e)
+        {
+            if (payModeSelect.Value.Equals("paypal"))
+            {
+                creditCard.Visible = false;
+                paypal.Visible = true;
+            }
+            else
+            {
+                paypal.Visible = false;
+                creditCard.Visible = true;
+            }
+        }
         private void getTotal()
         {
             var aux = (string[])Session["rent"];
@@ -27,13 +42,37 @@ namespace Sharefy_MDA
 
             priceToPay.InnerHtml = "<h2>Total = " + ((EndDate - StartDate).Days + 1) * price + " €</h2>";
         }
-
+        
         protected void confirmPayment(object sender, EventArgs e)
         {
-            rentCar();
-            Response.Redirect("/User.aspx");
+            if (checkValues())
+            {
+                rentCar();
+                Response.Redirect("/User.aspx");
+            }
         }
+        protected bool checkValues()
+        {
+            if (payModeSelect.Value.Equals("paypal"))
+            {
+                if (emailField.Value.Equals("") || pass.Value.Equals(""))
+                {
+                    fail.Visible = true;
+                    return false;
+                }
+            }
+            else
+            {
+                if (Number1.Value.Equals("") || Number2.Value.Equals("") || Number3.Value.Equals("")
+                    || Number4.Value.Equals("") || cvc.Value.Equals("") || expDate.Value.Equals(""))
+                {
+                    fail.Visible = true;
+                    return false;
+                }
+            }
 
+            return true;
+        }
 
         private void rentCar()
         {
