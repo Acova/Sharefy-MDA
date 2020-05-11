@@ -21,6 +21,7 @@
             </div>
         </div>
 
+        
         <div class="row">
             <div class="col">Datos acerca del vehículo</div>
             <div class="col">
