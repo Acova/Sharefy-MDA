@@ -39,9 +39,17 @@
         </div>
 
         <div class="row justify-content-md-center mb-2">
-                <div class="col-auto">
-                    <asp:Button CssClass="btn btn-primary" type="button" ID="editButton" Text="Editar perfil" runat="server" OnClick="editUser"/>
-                </div>
+            <div class="col-auto">
+                <asp:Button CssClass="btn btn-primary" type="button" ID="editButton" Text="Editar perfil" runat="server" OnClick="editUser" />
             </div>
+        </div>     
+    </div>
+    <h2>Lista de anuncios</h2>
+    <div class="row grid" id="anuncios" runat="server">
+
+    </div>
+    <h2>Coches alquilados</h2>
+    <div class="row grid" id="alquileres" runat="server">
+
     </div>
 </asp:Content>
