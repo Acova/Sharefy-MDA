@@ -29,6 +29,14 @@
                        aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
             </div>
         </div>
+        
+               <div class="form-group row">
+                            <div class="col">Condiciones adicionales</div>
+                            <div class="col">
+                                <input id="adicionalesInput" type="text" class="form-control" placeholder="Adicionales*"
+                                       aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
+                            </div>
+                        </div>
 
         <div class="row">
             <div class="col">Fecha inicial de disponibilidad</div>
