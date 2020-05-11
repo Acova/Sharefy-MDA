@@ -22,7 +22,7 @@
         </div>
 
         <div class="row">
-            <div class="col">Datos técnicos y condiciones</div>
+            <div class="col">Datos acerca del vehículo</div>
             <div class="col">
                 <input id="datosInput" type="text" class="form-control" placeholder="Datos*"
                        aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
