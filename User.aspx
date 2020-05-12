@@ -44,12 +44,23 @@
             </div>
         </div>     
     </div>
-    <h2>Lista de anuncios</h2>
+    <h2 class="text-center">Lista de anuncios</h2>
     <div class="row grid" id="anuncios" runat="server">
 
     </div>
-    <h2>Coches alquilados</h2>
-    <div class="row grid" id="alquileres" runat="server">
+    <h2 class="text-center">Coches alquilados</h2>
+    <div class="row" id="alquileres" runat="server">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Marca del coche</th>
+                    <th scope="col">Fecha de inicio</th>
+                    <th scope="col">Fecha de finalización</th>
+                </tr>
+            </thead>
+            <tbody id="bodyAlquileres" runat="server">
 
+            </tbody>
+        </table>
     </div>
 </asp:Content>
