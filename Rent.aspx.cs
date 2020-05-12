@@ -67,6 +67,7 @@ namespace Sharefy_MDA
                     || Number4.Value.Equals("") || cvc.Value.Equals("") || expDate.Value.Equals(""))
                 {
                     fail.Visible = true;
+                    creditCard.Visible = true;
                     return false;
                 }
             }
