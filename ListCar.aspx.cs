@@ -44,15 +44,7 @@ namespace Sharefy_MDA
 
         private string GetQuery()
         {
-           // return GetBase() + GetValues();
-           return
-               "insert into Coches (IDPropietario , Matricula, Datos, Inicio, Fin, Imagen, Ciudad, Marca, Modelo, Potencia, Puertas, Tipo, Precio, Condiciones) values (" +
-               "@userId" + "," + "@plate" + "," + "@data" + "," + "@initDate" + "," + "@endDate" + "," + "@img" +
-                                  "," + "@city" + "," + "@brand" + "," + "@model" + "," + "@power" + "," + "@doors" + "," + "@type" +
-                                  "," + "@price" +
-                                  "," + "@condition" + ")";
-           
-           
+            return GetBase() + GetValues();
         }
 
         private static string GetBase()
