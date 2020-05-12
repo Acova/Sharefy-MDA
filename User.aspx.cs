@@ -27,8 +27,9 @@ namespace Sharefy_MDA
             var route = HttpContext.Current.Server.MapPath(@"\BDCoches.db");
             var connnectionString = "data source=" + route;
             var deck = "";
+            var lines = "";
 
-            using(var db = new SQLiteConnection(connnectionString))
+            using (var db = new SQLiteConnection(connnectionString))
             {
                 db.Open();
                 var cmd = new SQLiteCommand("SELECT * FROM Usuarios WHERE ID=" + Session["id"], db);
@@ -62,8 +63,9 @@ namespace Sharefy_MDA
                         }
                     }
                 }
-                cmd = new SQLiteCommand("SELECT * FROM Coches WHERE IDPropietario=" + Session["id"], db);
+                cmd = new SQLiteCommand("SELECT * FROM Coches", db);
                 reader = cmd.ExecuteReader();
+                var carIDNameMap = new Dictionary<String, String>();
                 while (reader.Read())
                 {
                     var cardHtml = "";
@@ -80,6 +82,7 @@ namespace Sharefy_MDA
                     var tipo = "";
                     var precio = "";
                     var enlace = "";
+                    var idUsuario = "";
                     for(var i = 0; i < reader.FieldCount; i++)
                     {
                         if (!reader.IsDBNull(i))
@@ -104,14 +107,61 @@ namespace Sharefy_MDA
                                 case "Datos":
                                     datos = reader.GetString(i);
                                     break;
+                                case "IDPropietario":
+                                    idUsuario = reader.GetInt32(i).ToString();
+                                    break;
                             }
                         }
                     }
-                    enlace = "/AdProfile.aspx?car_id=" + imagen;
-                    cardHtml = generateCard(datos, inicio, fin, imagen, marca, enlace);
-                    deck += cardHtml;
+                    if (idUsuario.Equals(Session["id"]))
+                    {
+                        enlace = "/AdProfile.aspx?car_id=" + imagen;
+                        cardHtml = generateCard(datos, inicio, fin, imagen, marca, enlace);
+                        deck += cardHtml;
+                    }
+                    carIDNameMap.Add(imagen, marca);
                 }
                 anuncios.InnerHtml = deck;
+                cmd = new SQLiteCommand("SELECT * FROM Alquiler WHERE IDUsuario=" + Session["id"], db);
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var inicio = "";
+                    var fin = "";
+                    var carid = "";
+                    for(var i = 0; i < reader.FieldCount; i++)
+                    {
+                        if (!reader.IsDBNull(i))
+                        {
+                            switch (reader.GetName(i))
+                            {
+                                case "IDCoche":
+                                    carid = reader.GetInt32(i).ToString();
+                                    break;
+                                case "Inicio":
+                                    inicio = reader.GetString(i);
+                                    break;
+                                case "Fin":
+                                    fin = reader.GetString(i);
+                                    break;
+                            }
+                        }
+                    }
+                    var marca = "";
+                    if (carIDNameMap.TryGetValue(carid, out marca))
+                    {
+                        lines += generateRentLine(marca, inicio, fin);
+                    }
+                }
+                if (!lines.Equals(""))
+                {
+                    bodyAlquileres.InnerHtml = lines;
+                    System.Diagnostics.Debug.WriteLine(lines);
+                }
+                else
+                {
+                    alquileres.Visible = false;
+                }
                 db.Close();
             }
         }
@@ -147,6 +197,17 @@ namespace Sharefy_MDA
                         "<a href=\"" + enlace + "\" class=\"text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link\">Ver</a>" +
                     "</div>" +
                 "</div>";
+            return str;
+        }
+
+        protected string generateRentLine(string marca, string inicio, string fin)
+        {
+            var str =
+                "<tr>" + 
+                    "<td>" + marca + "</td>" +
+                    "<td>" + inicio + "</td>" +
+                    "<td>" + fin + "</td>" +
+                "</tr>";
             return str;
         }
     }
