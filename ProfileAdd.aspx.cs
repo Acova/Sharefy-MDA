@@ -74,7 +74,7 @@ namespace Sharefy_MDA
                             cmd.Parameters.Add("@Rol", DbType.String).Value = "usuario";
                         }
                         cmd.ExecuteNonQuery();
-                        Response.Redirect("./ListUser.aspx");
+                        Response.Redirect("./ListUsers.aspx");
 
                     }
                     catch
