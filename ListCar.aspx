@@ -29,14 +29,30 @@
                        aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="col">Condiciones adicionales</div>
+            <div class="col">
+                <input id="adicionalesInput" type="text" class="form-control" placeholder="Adicionales*"
+                       aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
+                </div>
+            </div>
         
-               <div class="form-group row">
-                            <div class="col">Condiciones adicionales</div>
-                            <div class="col">
-                                <input id="adicionalesInput" type="text" class="form-control" placeholder="Adicionales*"
-                                       aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
-                            </div>
+        
+         <div class="form-group row">
+                    <div class="col">Condiciones predefinidas</div>
+                    <div class="col">
+                   
+                            <fieldset>      
+                                <input type="checkbox" id="cond1" value="Cats">Condicion 1<br>      
+                                <input type="checkbox" id="cond2" value="Dogs">Condicion 2<br>      
+                                <input type="checkbox" id="cond3" value="Birds">Condicion 3<br>
+                            </fieldset>      
+                        
                         </div>
+                    </div>
+        
+        
+        
 
         <div class="row">
             <div class="col">Fecha inicial de disponibilidad</div>
