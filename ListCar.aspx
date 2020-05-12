@@ -47,7 +47,7 @@
                                 <input type="checkbox" id="cond2" value="Dogs">Condicion 2<br>      
                                 <input type="checkbox" id="cond3" value="Birds">Condicion 3<br>
                             </fieldset>      
-                        
+                         
                         </div>
                     </div>
         
