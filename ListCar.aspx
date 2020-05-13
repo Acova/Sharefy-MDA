@@ -41,18 +41,11 @@
          <div class="form-group row">
                     <div class="col">Condiciones predefinidas</div>
                     <div class="col">
-                   
-                   
-                   
-                   
-                   
-                   
-                            <fieldset>      
-                                <input type="checkbox" id="cond1" value="Cats">Condicion 1<br>      
-                                <input type="checkbox" id="cond2" value="Dogs">Condicion 2<br>      
-                                <input type="checkbox" id="cond3" value="Birds">Condicion 3<br>
-                            </fieldset>      
-                         
+                        
+                        <asp:CheckBox ID="CheckBox1" runat="server" Text="Solo mayores de 21 años"        OnCheckedChanged="CheckBox_CheckedChanged" AutoPostBack="true" />
+                        <asp:CheckBox ID="CheckBox2" runat="server" Text="Tener más de 2 años de carnet"  OnCheckedChanged="CheckBox_CheckedChanged" AutoPostBack="true"/>
+                        <asp:CheckBox ID="CheckBox3" runat="server" Text="Devolver con el tanque lleno"   OnCheckedChanged="CheckBox_CheckedChanged" AutoPostBack="true"/>
+                                            
                         </div>
                     </div>
         
