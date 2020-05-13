@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.WebControls;
+using Image = System.Drawing.Image;
 
 namespace Sharefy_MDA
 {
@@ -13,6 +16,7 @@ namespace Sharefy_MDA
     {
         protected System.Web.UI.HtmlControls.HtmlInputGenericControl InicioInput;
         protected System.Web.UI.HtmlControls.HtmlInputGenericControl FinInput;
+        private string condition;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -22,6 +26,17 @@ namespace Sharefy_MDA
             InicioInput.Value = DateTime.Now.ToString("yyyy-MM-dd");
             InicioInput.Attributes.Add("min", DateTime.Now.ToString("yyyy-MM-dd"));
             FinInput.Attributes.Add("min", DateTime.Now.ToString("yyyy-MM-dd"));
+        }
+        
+        protected void CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            List<CheckBox> checkBoxList = new List<CheckBox>();
+            checkBoxList.Add(CheckBox1);
+            checkBoxList.Add(CheckBox2);
+            checkBoxList.Add(CheckBox3);
+            var enumerable = checkBoxList.Where(x => x.Checked).Select(x=>x.Text);
+            condition = string.Join(",", enumerable);
+
         }
 
         protected void Create(object sender, EventArgs e)
@@ -120,7 +135,7 @@ namespace Sharefy_MDA
             var doors = puertasInput.Value;
             var price = precioInput.Value;
             var imag = Image.FromStream(flImage.PostedFile.InputStream);
-            var condition = adicionalesInput.Value;
+            condition += adicionalesInput.Value;
             
 
             var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
