@@ -17,6 +17,7 @@ namespace Sharefy_MDA
 
         protected void FillData(string sql)
         {
+            cards.InnerHtml = "";
             var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
             var connstring = "data source=" + relativeRoute;
             var deck = "";
@@ -37,7 +38,10 @@ namespace Sharefy_MDA
                         var precio = "";
                         var puertas = "";
                         var potencia = "";
-                        var filters = "";
+                        var tipo = "";
+                        var marca = "";
+                        var modelo = "";
+                        var ciudad = "";
                         for (var i = 0; i < reader.FieldCount; i++)
                             if (!reader.IsDBNull(i))
                             {
@@ -56,10 +60,12 @@ namespace Sharefy_MDA
                                         softTitle += "/" + reader.GetString(i);
                                         break;
                                     case "Marca":
-                                        title = reader.GetString(i);
+                                        marca = reader.GetString(i);
+                                        title = marca;
                                         break;
                                     case "Modelo":
-                                        title += " " + reader.GetString(i);
+                                        modelo = reader.GetString(i);
+                                        title += " " + modelo;
                                         break;
                                     case "Datos":
                                         text = reader.GetString(i);
@@ -75,13 +81,16 @@ namespace Sharefy_MDA
                                         potencia = reader.GetInt32(i) + "";
                                         break;
                                     case "Tipo":
-                                        filters = " " + reader.GetString(i);
+                                        tipo = " " + reader.GetString(i);
+                                        break;
+                                    case "Ciudad":
+                                        ciudad = " " + reader.GetString(i);
                                         break;
                                 }
                             }
 
                         link = "/AdProfile.aspx?car_id=" + img;
-                        deck += NewCard(img, softTitle, title, text, link, precio, puertas, potencia, filters);
+                        deck += NewCard(img, softTitle, title, text, link, precio, puertas, potencia, tipo, marca, modelo);
                     }
                 }
 
@@ -91,9 +100,9 @@ namespace Sharefy_MDA
         }
 
         protected string NewCard(string img, string softTitle, string title, string text, string link, string precio,
-            string puertas, string potencia, string filters)
+            string puertas, string potencia, string tipo, string marca, string modelo)
         {
-            return "<div class=\"col-4 my-2 mx-auto position-relative bg-white \">"
+            return "<div class=\"col-4 my-2 mx-auto position-relative bg-white filterDiv show " + tipo + " " + marca + " " + puertas + "puertas \">"
                    + "<div style=\"height: 100%; width: 100%; box-shadow: 0px 0px 8px 4px rgba(0,0,0,0.41); border-radius: 2px;\">"
                 + "<div style=\"height: 300px; overflow: hidden\">"
                    +"<img src=\"" + "imageHandler.ashx?id=" + img + "\" alt=\"Man with backpack\" class=\"img-responsive w-100\">"
@@ -105,16 +114,20 @@ namespace Sharefy_MDA
                    + "</h1><p class=\"mb-1\">" + text
                    + "</p></div><a href=\"" + link +
                    "\" class=\"text-uppercase d-inline-block font-weight-medium lts-2px ml-2 mb-2 text-center styled-link\">Ver</a>"
-                   + "<div class=\"precio\" style=\"display: none;\">" + precio + "</div>"
-                   + "<div class=\"puertas\" style=\"display: none;\">" + puertas + "</div>"
-                   + "<div class=\"potencia\" style=\"display: none;\">" + potencia + "</div>"
                    + "</div>"
                    + "</div>";
         }
 
         protected void search(object sender, EventArgs e)
         {
+            String searchText = searchWord.Value;
+            String category = CategorySelectInput.Value;
+            FillData("select * from Coches WHERE [" + category + "] LIKE \'%" + searchText + "%\'");
+        }
 
+        protected void resetSearch(object sender, EventArgs e)
+        {
+            FillData("select * from Coches");
         }
     }
 }
