@@ -42,6 +42,11 @@
                     <div class="col">Condiciones predefinidas</div>
                     <div class="col">
                    
+                   
+                   
+                   
+                   
+                   
                             <fieldset>      
                                 <input type="checkbox" id="cond1" value="Cats">Condicion 1<br>      
                                 <input type="checkbox" id="cond2" value="Dogs">Condicion 2<br>      
