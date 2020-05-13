@@ -97,6 +97,7 @@ namespace Sharefy_MDA
                         var type = "";
                         var doors = 0;
                         var power = 0;
+                        var city = "";
                         for (var i = 0; i < reader.FieldCount; i++)
                             if (!reader.IsDBNull(i))
                             {
@@ -156,11 +157,14 @@ namespace Sharefy_MDA
                                     case "Tipo":
                                         type = info;
                                         break;
+                                    case "Ciudad":
+                                        city = info;
+                                        break;
                                 }
                             }
 
                         deck += showData(ownId, img, softTitle, text, plate, dateFrom, dateTo, carM, model, power, doors, type,
-                            price);
+                            price, city);
                     }
                 }
 
@@ -199,7 +203,7 @@ namespace Sharefy_MDA
         }
 
         protected string showData(string ownId, string img, string softTitle, string text, string plate, string dateF, string dateT,
-            string carM, string model, int power, int doors, string type, int price)
+            string carM, string model, int power, int doors, string type, int price, string city)
         {
             return "<div class=\"my-2 mx-auto position-relative bg-white\" style=\"width: 100%;\">"
                 + "<div style=\"height: 400px; overflow: hidden center-block\">"
@@ -213,6 +217,10 @@ namespace Sharefy_MDA
                 "</div>" +
                 "</div>" +
                 "<div>"
+                + "<div class=\"row\">" +
+                "<div class=\"col-md-auto\">Ciudad: </div>" +
+                "<p class=\"col-md-auto\">" + city + "</p>" +
+                "</div>"
                 + "<div class=\"row\">" +
                 "<div class=\"col-md-auto\">Matrícula: </div>" +
                 "<p class=\"col-md-auto\">" + plate + "</p>" +
