@@ -30,12 +30,19 @@ namespace Sharefy_MDA
         
         protected void CheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            condition = "";
             List<CheckBox> checkBoxList = new List<CheckBox>();
             checkBoxList.Add(CheckBox1);
             checkBoxList.Add(CheckBox2);
             checkBoxList.Add(CheckBox3);
-            var enumerable = checkBoxList.Where(x => x.Checked).Select(x=>x.Text);
-            condition = string.Join(",", enumerable);
+            foreach (CheckBox checkBox in checkBoxList)
+            {
+                if (checkBox.Checked)
+                {
+                    condition += " " + checkBox.Text;
+                    System.Diagnostics.Debug.WriteLine(checkBox.Text);
+                }
+            }
 
         }
 
@@ -54,7 +61,7 @@ namespace Sharefy_MDA
 
         protected void Cancel(object sender, EventArgs e)
         {
-            Response.Redirect("/Profile?profile_id=" + Session["id"]);
+            Response.Redirect("/VendorProfile?profile_id=" + Session["id"]);
         }
 
         private string GetQuery()
@@ -174,7 +181,7 @@ namespace Sharefy_MDA
                         fail.Visible = true;
                     }
 
-                    Response.Redirect("/Profile?profile_id=" + Session["id"]);
+                    Response.Redirect("/VendorProfile?profile_id=" + Session["id"]);
                 }
 
                 db.Close();
