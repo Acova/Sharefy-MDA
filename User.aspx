@@ -56,6 +56,7 @@
                     <th scope="col">Marca del coche</th>
                     <th scope="col">Fecha de inicio</th>
                     <th scope="col">Fecha de finalización</th>
+                    <th scope="col">Cancelar</th>
                 </tr>
             </thead>
             <tbody id="bodyAlquileres" runat="server">
