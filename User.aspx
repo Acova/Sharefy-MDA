@@ -46,19 +46,46 @@
     </div>
     <h2 class="text-center">Lista de anuncios</h2>
     <div class="row grid" id="anuncios" runat="server">
-
-    </div>
-
-    <h2 class="text-center">Coches alquilados</h2>
-
-    <div class="row justify-content-md-center mt-2 mb-2" id="alquileres2" runat="server">
         <asp:GridView 
             CssClass="table" 
-            ID="GridViewData" 
+            ID="AdGridViewData" 
             runat="server" 
             AutoGenerateColumns="false" 
             DataKeyNames="id" 
-            OnRowCommand="GridViewData_RowCommand">
+            OnRowCommand="AdGridViewData_RowCommand">
+            <Columns>
+                <asp:BoundField DataField="ID" HeaderText="ID" Visible="false" />
+                <asp:BoundField DataField="Marca" HeaderText="Marca" />
+                <asp:BoundField DataField="Matricula" HeaderText="Matricula" />
+                <asp:BoundField DataField="Datos" HeaderText="Datos" />
+                <asp:BoundField DataField="Inicio" HeaderText="Inicio" />
+                <asp:BoundField DataField="Fin" HeaderText="Fin" />
+                <asp:TemplateField HeaderText="Eliminar" SortExpression="">
+                    <ItemTemplate>
+                        <asp:LinkButton
+                            CssClass="btn btn-danger"
+                            ID="LinkButtonDeleteAdd"
+                            runat="server"
+                            CommandName="DeleteUser"
+                            CommandArgument='<%#Eval("ID") %>'
+                            OnClientClick="return confirm('¿Desea eliminar este anuncio?')">
+                            Eliminar
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
+    </div>
+
+    <h2 class="text-center">Coches alquilados</h2>
+    <div class="row justify-content-md-center mt-2 mb-2" id="alquileres" runat="server">
+        <asp:GridView 
+            CssClass="table" 
+            ID="RentGridViewData" 
+            runat="server" 
+            AutoGenerateColumns="false" 
+            DataKeyNames="id" 
+            OnRowCommand="RentGridViewData_RowCommand">
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="Código de alquiler" />
                 <asp:BoundField DataField="Marca" HeaderText="Marca" />
@@ -74,7 +101,7 @@
                             CommandName="DeleteUser"
                             CommandArgument='<%#Eval("ID") %>'
                             OnClientClick="return confirm('¿Desea cancelar este alquiler?')">
-                            Eliminar
+                            Cancelar
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
