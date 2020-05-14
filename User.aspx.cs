@@ -28,7 +28,6 @@ namespace Sharefy_MDA
             var route = HttpContext.Current.Server.MapPath(@"\BDCoches.db");
             var connnectionString = "data source=" + route;
             var deck = "";
-            var lines = "";
 
             using (var db = new SQLiteConnection(connnectionString))
             {
@@ -64,26 +63,18 @@ namespace Sharefy_MDA
                         }
                     }
                 }
-                cmd = new SQLiteCommand("SELECT * FROM Coches", db);
+                cmd = new SQLiteCommand("SELECT * FROM Coches WHERE IDPropietario=" + Session["id"], db);
                 reader = cmd.ExecuteReader();
-                var carIDNameMap = new Dictionary<String, String>();
                 while (reader.Read())
                 {
                     var cardHtml = "";
-                    var matricula = "";
                     var datos = "";
                     var inicio = "";
                     var fin = "";
                     var imagen = "";
                     var ciudad = "";
                     var marca = "";
-                    var modelo = "";
-                    var potencia = "";
-                    var puertas = "";
-                    var tipo = "";
-                    var precio = "";
                     var enlace = "";
-                    var idUsuario = "";
                     for(var i = 0; i < reader.FieldCount; i++)
                     {
                         if (!reader.IsDBNull(i))
@@ -108,19 +99,12 @@ namespace Sharefy_MDA
                                 case "Datos":
                                     datos = reader.GetString(i);
                                     break;
-                                case "IDPropietario":
-                                    idUsuario = reader.GetInt32(i).ToString();
-                                    break;
                             }
                         }
                     }
-                    if (idUsuario.Equals(Session["id"]))
-                    {
-                        enlace = "/AdProfile.aspx?car_id=" + imagen;
-                        cardHtml = generateCard(datos, inicio, fin, imagen, marca, enlace);
-                        deck += cardHtml;
-                    }
-                    carIDNameMap.Add(imagen, marca);
+                    enlace = "/AdProfile.aspx?car_id=" + imagen;
+                    cardHtml = generateCard(datos, inicio, fin, imagen, marca, enlace);
+                    deck += cardHtml;
                 }
                 anuncios.InnerHtml = deck;
                 DataTable dt = new DataTable();
