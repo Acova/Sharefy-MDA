@@ -78,21 +78,21 @@ namespace Sharefy_MDA
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl anuncios;
 
         /// <summary>
-        /// Control alquileres.
+        /// Control alquileres2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alquileres;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl alquileres2;
 
         /// <summary>
-        /// Control bodyAlquileres.
+        /// Control GridViewData.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl bodyAlquileres;
+        protected global::System.Web.UI.WebControls.GridView GridViewData;
     }
 }

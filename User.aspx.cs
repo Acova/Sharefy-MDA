@@ -1,6 +1,7 @@
 ﻿using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
@@ -122,46 +123,17 @@ namespace Sharefy_MDA
                     carIDNameMap.Add(imagen, marca);
                 }
                 anuncios.InnerHtml = deck;
-                cmd = new SQLiteCommand("SELECT * FROM Alquiler WHERE IDUsuario=" + Session["id"], db);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    var inicio = "";
-                    var fin = "";
-                    var carid = "";
-                    for(var i = 0; i < reader.FieldCount; i++)
-                    {
-                        if (!reader.IsDBNull(i))
-                        {
-                            switch (reader.GetName(i))
-                            {
-                                case "IDCoche":
-                                    carid = reader.GetInt32(i).ToString();
-                                    break;
-                                case "Inicio":
-                                    inicio = reader.GetString(i);
-                                    break;
-                                case "Fin":
-                                    fin = reader.GetString(i);
-                                    break;
-                            }
-                        }
-                    }
-                    var marca = "";
-                    if (carIDNameMap.TryGetValue(carid, out marca))
-                    {
-                        lines += generateRentLine(marca, inicio, fin);
-                    }
-                }
-                if (!lines.Equals(""))
-                {
-                    bodyAlquileres.InnerHtml = lines;
-                    System.Diagnostics.Debug.WriteLine(lines);
-                }
-                else
-                {
-                    alquileres.Visible = false;
-                }
+                DataTable dt = new DataTable();
+                cmd = new SQLiteCommand(
+                    "SELECT Alquiler.ID, Alquiler.IDCoche, Alquiler.Inicio, Alquiler.Fin, Coches.Marca " +
+                    "FROM Alquiler " +
+                    "INNER JOIN Coches ON Coches.ID=Alquiler.IDCoche " +
+                    "WHERE Alquiler.IDUsuario=" + Session["id"], db);
+                cmd.CommandType = CommandType.Text;
+                SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
+                da.Fill(dt);
+                GridViewData.DataSource = dt;
+                GridViewData.DataBind();
                 db.Close();
             }
         }
@@ -200,18 +172,28 @@ namespace Sharefy_MDA
             return str;
         }
 
-        protected string generateRentLine(string marca, string inicio, string fin)
+        protected void GridViewData_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            var str =
-                "<tr>" + 
-                    "<td>" + marca + "</td>" +
-                    "<td>" + inicio + "</td>" +
-                    "<td>" + fin + "</td>" +
-                    "<td>" + 
-                        "" +
-                    "</td>" +
-                "</tr>";
-            return str;
+            if(e.CommandName == "DeleteUser")
+            {
+                LinkButton button = (LinkButton)e.CommandSource;
+                GridViewRow row = (GridViewRow)button.NamingContainer;
+                var id = GridViewData.DataKeys[row.RowIndex].Value.ToString();
+                var startDate = DateTime.ParseExact(row.Cells[3].Text, "yyyy-MM-dd", null);
+                if ((startDate - DateTime.Today).Days > 3)
+                {
+                    var route = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+                    var str = "data source=" + route;
+                    using(var db = new SQLiteConnection(str))
+                    {
+                        db.Open();
+                        var cmd = new SQLiteCommand("DELETE FROM Alquiler WHERE ID=" + id, db);
+                        cmd.ExecuteReader();
+                        db.Close();
+                    }
+                    fetchUserData();
+                }
+            }
         }
     }
 }
