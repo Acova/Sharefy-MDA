@@ -15,22 +15,31 @@ namespace Sharefy_MDA
     {
 
         /// <summary>
-        /// Control nameInput.
+        /// Control success.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText nameInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl success;
 
         /// <summary>
-        /// Control mailInput.
+        /// Control fail.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText mailInput;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fail;
+
+        /// <summary>
+        /// Control accountInput.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText accountInput;
 
         /// <summary>
         /// Control textArea.
