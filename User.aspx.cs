@@ -207,6 +207,9 @@ namespace Sharefy_MDA
                     "<td>" + marca + "</td>" +
                     "<td>" + inicio + "</td>" +
                     "<td>" + fin + "</td>" +
+                    "<td>" + 
+                        "" +
+                    "</td>" +
                 "</tr>";
             return str;
         }
