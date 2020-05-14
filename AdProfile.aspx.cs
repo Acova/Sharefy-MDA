@@ -264,6 +264,11 @@ namespace Sharefy_MDA
         {
             needMoreData.Visible = true;
         }
+
+        protected void reportAd(object sender, EventArgs e)
+        {
+            reportDone.Visible = true;
+        }
     }
 
 }
