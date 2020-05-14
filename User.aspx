@@ -48,6 +48,7 @@
     <div class="row grid" id="anuncios" runat="server">
 
     </div>
+
     <h2 class="text-center">Coches alquilados</h2>
 
     <div class="row justify-content-md-center mt-2 mb-2" id="alquileres2" runat="server">
