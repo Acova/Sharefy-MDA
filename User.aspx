@@ -49,19 +49,35 @@
 
     </div>
     <h2 class="text-center">Coches alquilados</h2>
-    <div class="row" id="alquileres" runat="server">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Marca del coche</th>
-                    <th scope="col">Fecha de inicio</th>
-                    <th scope="col">Fecha de finalización</th>
-                    <th scope="col">Cancelar</th>
-                </tr>
-            </thead>
-            <tbody id="bodyAlquileres" runat="server">
 
-            </tbody>
-        </table>
+    <div class="row justify-content-md-center mt-2 mb-2" id="alquileres2" runat="server">
+        <asp:GridView 
+            CssClass="table" 
+            ID="GridViewData" 
+            runat="server" 
+            AutoGenerateColumns="false" 
+            DataKeyNames="id" 
+            OnRowCommand="GridViewData_RowCommand">
+            <Columns>
+                <asp:BoundField DataField="ID" HeaderText="Código de alquiler" />
+                <asp:BoundField DataField="Marca" HeaderText="Marca" />
+                <asp:BoundField DataField="IDCoche" HeaderText="ID del coche" Visible="false"/>
+                <asp:BoundField DataField="Inicio" HeaderText="Fecha de Inicio" />
+                <asp:BoundField DataField="Fin" HeaderText="Fecha de fin" />
+                <asp:TemplateField HeaderText="Cancelar" SortExpression="">
+                    <ItemTemplate>
+                        <asp:LinkButton
+                            CssClass="btn btn-danger"
+                            ID="LinkButtonDelete"
+                            runat="server"
+                            CommandName="DeleteUser"
+                            CommandArgument='<%#Eval("ID") %>'
+                            OnClientClick="return confirm('¿Desea cancelar este alquiler?')">
+                            Eliminar
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+        </asp:GridView>
     </div>
 </asp:Content>
