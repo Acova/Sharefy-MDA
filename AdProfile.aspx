@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdProfile.aspx.cs" Inherits="Sharefy_MDA.AdProfile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div id="reportDone" class="alert alert-danger" role="alert" runat="server">
-        Se ha denunciado este anucio
+        Se ha reportado este anucio
     </div>
     <div id="needMoreData" class="alert alert-danger" role="alert" runat="server">
         No se han rellenado los campos necesarios para alquilar
@@ -45,5 +45,9 @@
         <div style="margin: 5px">
             <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="cancel" Text="Cancelar" runat="server" OnClick="cancelRent"/>
         </div>
+        <div style="margin: 5px">
+            <asp:Button CssClass="btn btn-secondary searchButton" type="button" ID="reportButton" Text="Reportar Anuncio" runat="server" OnClick="reportAd" OnClientClick="return confirm('¿Desea reportar este anuncio?')"/>
+        </div>
     </div>
+
 </asp:Content>
