@@ -38,6 +38,9 @@
     </div>
 
 
+
+
+
     <div class="row justify-content-md-center mb-2">
         <div id="confirmRent" style="margin: 5px">
             <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="rentButton" Text="Confirmar Alquiler" runat="server" OnClick="confirmRent"/>
