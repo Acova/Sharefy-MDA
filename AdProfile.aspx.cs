@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SQLite;
+using System.Data;
 
 namespace Sharefy_MDA
 {
@@ -267,8 +268,35 @@ namespace Sharefy_MDA
 
         protected void reportAd(object sender, EventArgs e)
         {
-            reportDone.Visible = true;
-        }
-    }
+            var userId = Session["id"].ToString();
+            var carId = Request.QueryString["car_id"];
 
+            var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+            var connstring = "data source=" + relativeRoute;
+            using (var db = new SQLiteConnection(connstring))
+            {
+                db.Open();
+
+                using (var cmd = new SQLiteCommand("insert into Reportes(IDCoche, IDUsuario) values (@car, @user)", db))
+                {
+                    try
+                    {
+                        cmd.Parameters.Add("@car", DbType.Int32).Value = carId;
+                        cmd.Parameters.Add("@user", DbType.Int32).Value = userId;
+                        cmd.ExecuteNonQuery();
+                        reportDone.InnerText = "Se ha reportado este anucio";
+                        reportDone.Visible = true;
+                    }
+                    catch
+                    {
+                        reportDone.InnerText = "Error al procesar el reporte";
+                        reportDone.Visible = true;
+                    }
+                }
+                db.Close();
+            }
+        }
+
+
+    }
 }
