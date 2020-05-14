@@ -63,61 +63,25 @@ namespace Sharefy_MDA
                         }
                     }
                 }
-                cmd = new SQLiteCommand("SELECT * FROM Coches WHERE IDPropietario=" + Session["id"], db);
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    var cardHtml = "";
-                    var datos = "";
-                    var inicio = "";
-                    var fin = "";
-                    var imagen = "";
-                    var ciudad = "";
-                    var marca = "";
-                    var enlace = "";
-                    for(var i = 0; i < reader.FieldCount; i++)
-                    {
-                        if (!reader.IsDBNull(i))
-                        {
-                            switch (reader.GetName(i))
-                            {
-                                case "ID":
-                                    imagen = reader.GetInt32(i).ToString();
-                                    break;
-                                case "Inicio":
-                                    inicio = reader.GetString(i);
-                                    break;
-                                case "Fin":
-                                    fin = reader.GetString(i);
-                                    break;
-                                case "Ciudad":
-                                    ciudad = reader.GetString(i);
-                                    break;
-                                case "Marca":
-                                    marca = reader.GetString(i);
-                                    break;
-                                case "Datos":
-                                    datos = reader.GetString(i);
-                                    break;
-                            }
-                        }
-                    }
-                    enlace = "/AdProfile.aspx?car_id=" + imagen;
-                    cardHtml = generateCard(datos, inicio, fin, imagen, marca, enlace);
-                    deck += cardHtml;
-                }
-                anuncios.InnerHtml = deck;
-                DataTable dt = new DataTable();
+                DataTable adDataTable = new DataTable();
+                cmd = new SQLiteCommand("SELECT ID, Datos, Inicio, Fin, Marca, Matricula FROM Coches WHERE IDPropietario=" + Session["id"], db);
+                cmd.CommandType = CommandType.Text;
+                SQLiteDataAdapter adDataAdapter = new SQLiteDataAdapter(cmd);
+                adDataAdapter.Fill(adDataTable);
+                AdGridViewData.DataSource = adDataTable;
+                AdGridViewData.DataBind();
+
+                DataTable rentDataTable = new DataTable();
                 cmd = new SQLiteCommand(
                     "SELECT Alquiler.ID, Alquiler.IDCoche, Alquiler.Inicio, Alquiler.Fin, Coches.Marca " +
                     "FROM Alquiler " +
                     "INNER JOIN Coches ON Coches.ID=Alquiler.IDCoche " +
                     "WHERE Alquiler.IDUsuario=" + Session["id"], db);
                 cmd.CommandType = CommandType.Text;
-                SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-                da.Fill(dt);
-                GridViewData.DataSource = dt;
-                GridViewData.DataBind();
+                SQLiteDataAdapter rentDataAdapter = new SQLiteDataAdapter(cmd);
+                rentDataAdapter.Fill(rentDataTable);
+                RentGridViewData.DataSource = rentDataTable;
+                RentGridViewData.DataBind();
                 db.Close();
             }
         }
@@ -156,13 +120,13 @@ namespace Sharefy_MDA
             return str;
         }
 
-        protected void GridViewData_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void RentGridViewData_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if(e.CommandName == "DeleteUser")
             {
                 LinkButton button = (LinkButton)e.CommandSource;
                 GridViewRow row = (GridViewRow)button.NamingContainer;
-                var id = GridViewData.DataKeys[row.RowIndex].Value.ToString();
+                var id = RentGridViewData.DataKeys[row.RowIndex].Value.ToString();
                 var startDate = DateTime.ParseExact(row.Cells[3].Text, "yyyy-MM-dd", null);
                 if ((startDate - DateTime.Today).Days > 3)
                 {
@@ -177,6 +141,30 @@ namespace Sharefy_MDA
                     }
                     fetchUserData();
                 }
+                else
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('No se puede cancelar este alquiler')", true);
+                }
+            }
+        }
+
+        protected void AdGridViewData_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteUser")
+            {
+                LinkButton button = (LinkButton)e.CommandSource;
+                GridViewRow row = (GridViewRow)button.NamingContainer;
+                var id = AdGridViewData.DataKeys[row.RowIndex].Value.ToString();
+                var route = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+                var str = "data source=" + route;
+                using (var db = new SQLiteConnection(str))
+                {
+                    db.Open();
+                    var cmd = new SQLiteCommand("DELETE FROM Coches WHERE ID=" + id, db);
+                    cmd.ExecuteReader();
+                    db.Close();
+                }
+                fetchUserData();
             }
         }
     }
