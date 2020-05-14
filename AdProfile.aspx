@@ -18,9 +18,8 @@
     </div>
 
     <div class="row justify-content-md-center mb-2">
-        <div class="col-md-auto">
-        </div>
-        <div class="col-md-auto" id="userDateFrom">
+
+        <div class="col-md-3" id="userDateFrom">
             <p>Fecha Inicial: </p>
             <input class="form-control" id="dateF" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" runat="server" style="margin: 2px"
                    title="La fecha tiene que tener el formato MM-dd-yyyy" type="date"/>
@@ -28,9 +27,7 @@
     </div>
 
     <div class="row justify-content-md-center mb-2">
-        <div class="col-md-auto">
-        </div>
-        <div class="col-md-auto" id="userDateTo">
+        <div class="col-md-3" id="userDateTo">
             <p>Fecha Final:</p>
             <input class="form-control" id="dateT" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" runat="server" style="margin: 2px"
                    title="La fecha tiene que tener el formato MM-dd-yyyy" type="date"/>
@@ -38,7 +35,13 @@
     </div>
 
 
-
+    <div class="row justify-content-md-center mb-2">
+        <div class="col-md-3" id="place-wrap">
+            <p>Lugar de recogida:</p>
+            <input class="form-control" id="place" required runat="server" style="margin: 2px"
+                   title="Indique lugar de recogida" type="text"/>
+        </div>
+    </div>
 
 
     <div class="row justify-content-md-center mb-2">

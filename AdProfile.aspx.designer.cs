@@ -42,6 +42,15 @@ namespace Sharefy_MDA
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl Car_data;
 
         /// <summary>
+        /// Control place.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText place;
+
+        /// <summary>
         /// Control rentButton.
         /// </summary>
         /// <remarks>
