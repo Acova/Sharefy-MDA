@@ -29,28 +29,23 @@
                        aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
             </div>
         </div>
+        
+        <div class="form-group row">
+            <div class="col">Condiciones predefinidas</div>
+            <div class="col">   
+                <asp:CheckBox ID="CheckBox1" runat="server" Text="Solo mayores de 21 años" /><br />
+                <asp:CheckBox ID="CheckBox2" runat="server" Text="Tener más de 2 años de carnet" /><br />
+                <asp:CheckBox ID="CheckBox3" runat="server" Text="Devolver con el tanque lleno" /><br />                             
+            </div>
+        </div>
+        
         <div class="form-group row">
             <div class="col">Condiciones adicionales</div>
             <div class="col">
                 <input id="adicionalesInput" type="text" class="form-control" placeholder="Adicionales*"
                        aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
-                </div>
             </div>
-        
-        
-         <div class="form-group row">
-                    <div class="col">Condiciones predefinidas</div>
-                    <div class="col">
-                        
-                        <asp:CheckBox ID="CheckBox1" runat="server" Text="Solo mayores de 21 años"        OnCheckedChanged="CheckBox_CheckedChanged" AutoPostBack="true" />
-                        <asp:CheckBox ID="CheckBox2" runat="server" Text="Tener más de 2 años de carnet"  OnCheckedChanged="CheckBox_CheckedChanged" AutoPostBack="true"/>
-                        <asp:CheckBox ID="CheckBox3" runat="server" Text="Devolver con el tanque lleno"   OnCheckedChanged="CheckBox_CheckedChanged" AutoPostBack="true"/>
-                                            
-                        </div>
-                    </div>
-        
-        
-        
+        </div>  
 
         <div class="row">
             <div class="col">Fecha inicial de disponibilidad</div>

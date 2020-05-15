@@ -136,7 +136,20 @@ namespace Sharefy_MDA
             var doors = puertasInput.Value;
             var price = precioInput.Value;
             var imag = Image.FromStream(flImage.PostedFile.InputStream);
-            condition += adicionalesInput.Value;
+            var cond = "";
+            if (CheckBox1.Checked)
+            {
+                cond += "Mayores de 21-";
+            }
+            if (CheckBox2.Checked)
+            {
+                cond += "2 años de carnet-";
+            }
+            if (CheckBox3.Checked)
+            {
+                cond += "Devolver repostado-";
+            }
+            cond += adicionalesInput.Value;
             
 
             var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
@@ -163,7 +176,7 @@ namespace Sharefy_MDA
                         cmd.Parameters.Add("@doors", DbType.Int32).Value = doors;
                         cmd.Parameters.Add("@type", DbType.String).Value = type;
                         cmd.Parameters.Add("@price", DbType.Int32).Value = price;
-                        cmd.Parameters.Add("@condition", DbType.String).Value = condition;
+                        cmd.Parameters.Add("@condition", DbType.String).Value = cond;
 
                         cmd.ExecuteNonQuery();
                         success.Visible = true;
@@ -174,7 +187,7 @@ namespace Sharefy_MDA
                         fail.Visible = true;
                     }
 
-                    Response.Redirect("/Profile?profile_id=" + Session["id"]);
+                    Response.Redirect("/User");
                 }
 
                 db.Close();
