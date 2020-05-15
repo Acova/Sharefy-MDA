@@ -21,6 +21,10 @@ namespace Sharefy_MDA
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["id"] == null)
+            {
+                Response.Redirect("~/Default.aspx");
+            }
             success.Visible = false;
             fail.Visible = false;
             InicioInput.Value = DateTime.Now.ToString("yyyy-MM-dd");
@@ -54,7 +58,7 @@ namespace Sharefy_MDA
 
         protected void Cancel(object sender, EventArgs e)
         {
-            Response.Redirect("/Profile?profile_id=" + Session["id"]);
+            Response.Redirect("/User");
         }
 
         private string GetQuery()

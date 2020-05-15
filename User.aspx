@@ -44,6 +44,11 @@
             </div>
         </div>     
     </div>
+    <div class="row justify-content-md-center mb-2">
+        <div class="col-auto">
+            <a href="/ListCar" class="btn btn-primary searchButton"> Añadir anuncio</a>
+        </div>
+    </div>
     <h2 class="text-center">Lista de anuncios</h2>
     <div class="row grid" id="anuncios" runat="server">
         <asp:GridView 
