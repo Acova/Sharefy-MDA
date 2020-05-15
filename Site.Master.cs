@@ -11,10 +11,30 @@ namespace Sharefy_MDA
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["rol"] == null || Session["rol"].Equals("usuario"))
+            if (!(Session["id"] == null))
             {
+                if (Session["rol"].Equals("usuario"))
+                {
+                    adminLink.Visible = false;
+                }
+                loginLink.Visible = false;
+                registerLink.Visible = false;
+            }
+            else
+            {
+                logoutLink.Visible = false;
+                accountLink.Visible = false;
                 adminLink.Visible = false;
             }
+            
+        }
+
+        protected void Logout(object sender, EventArgs e)
+        {
+            Session["id"] = null;
+            Session["userName"] = null;
+            Session["rol"] = null;
+            Response.Redirect("~/Default.aspx");
         }
     }
 }
