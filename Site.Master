@@ -78,7 +78,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Sharefy/p>
+                <p>&copy; <%: DateTime.Now.Year %> - Sharefy</p>
             </footer>
         </div>
 

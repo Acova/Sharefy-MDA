@@ -18,6 +18,8 @@ namespace Sharefy_MDA
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["id"] == null) Response.Redirect("/Login.aspx");
+            success.Visible = false;
+            fail.Visible = false;
         }
 
         public void send(object sender, EventArgs e)

@@ -11,7 +11,7 @@
     </div>
 
     <div class="searchMenu">
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Matrícula</div>
             <div class="col">
                 <input id="matriculaInput" type="text" class="form-control" placeholder="Matrícula*"
@@ -22,7 +22,7 @@
         </div>
 
         
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Datos acerca del vehículo</div>
             <div class="col">
                 <input id="datosInput" type="text" class="form-control" placeholder="Datos*"
@@ -30,7 +30,7 @@
             </div>
         </div>
         
-        <div class="form-group row">
+        <div class="form-group row my-2">
             <div class="col">Condiciones predefinidas</div>
             <div class="col">   
                 <asp:CheckBox ID="CheckBox1" runat="server" Text="Solo mayores de 21 años" /><br />
@@ -39,7 +39,7 @@
             </div>
         </div>
         
-        <div class="form-group row">
+        <div class="form-group row my-2">
             <div class="col">Condiciones adicionales</div>
             <div class="col">
                 <input id="adicionalesInput" type="text" class="form-control" placeholder="Adicionales*"
@@ -47,7 +47,7 @@
             </div>
         </div>  
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Fecha inicial de disponibilidad</div>
             <div class="col">
                 <input id="InicioInput" type="date" class="form-control"
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Fecha final de disponibilidad</div>
             <div class="col">
                 <input id="FinInput" type="date" class="form-control"
@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Imagen</div>
             <div class="col">
                 <asp:FileUpload runat="server" ID="flImage" aria-describedby="Button1" style="min-width: 100px;"/>
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Ciudad</div>
             <div class="col">
                 <input id="ciudadInput" type="text" class="form-control" placeholder="Ciudad*"
@@ -79,14 +79,14 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Marca</div>
             <div class="col">
                 <input id="marcaInput" type="text" class="form-control" placeholder="Marca*"
                        aria-describedby="Button1" runat="server" style="min-width: 100px;"/>
             </div>
         </div>
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Modelo</div>
             <div class="col">
                 <input id="modeloInput" type="text" class="form-control" placeholder="Modelo*"
@@ -94,7 +94,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Potencia (en CV)</div>
             <div class="col">
                 <input id="potenciaInput" type="text" class="form-control" placeholder="Potencia*"
@@ -102,7 +102,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Puertas</div>
             <div class="col">
                 <input id="puertasInput" type="text" class="form-control" placeholder="Número de puertas*"
@@ -110,7 +110,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Tipo de coche</div>
             <div class="col">
 
@@ -127,7 +127,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col">Precio</div>
             <div class="col">
                 <input id="precioInput" type="text" class="form-control" placeholder="Precio*"
@@ -135,7 +135,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row my-2">
             <div class="col-auto">
                 <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="Button2" Text="Crear" runat="server" OnClick="Create"/>
                 <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="Button1" Text="Cancelar" runat="server" OnClick="Cancel"/>
