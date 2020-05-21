@@ -349,6 +349,7 @@ namespace Sharefy_MDA
                 db.Close();
             }
             checkFav();
+            
         }
 
     }
