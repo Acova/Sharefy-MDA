@@ -302,7 +302,25 @@ namespace Sharefy_MDA
 
         public void checkFav()
         {
+            var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+            var connstring = "data source=" + relativeRoute;
             
+            var userId = Session["id"].ToString();
+            var carId = Request.QueryString["car_id"];
+            
+            using (var db = new SQLiteConnection(connstring))
+            {
+                db.Open();
+                using (var cmd = new SQLiteCommand("select * from Favoritos where IDUsuario ='"+userId+"'and IDCoche = '" + carId + "'", db))
+                {
+                    var reader = cmd.ExecuteScalar();
+
+                    if (reader != null) favButton.Visible = false;
+
+                }
+
+                db.Close();
+            }
         }
 
         public void addToFav(object sender, EventArgs e)
@@ -330,7 +348,7 @@ namespace Sharefy_MDA
                 }
                 db.Close();
             }
-
+            checkFav();
         }
 
     }

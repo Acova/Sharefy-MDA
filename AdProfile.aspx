@@ -55,7 +55,7 @@
             <asp:Button CssClass="btn btn-secondary searchButton" type="button" ID="reportButton" Text="Reportar Anuncio" runat="server" OnClick="reportAd" OnClientClick="return confirm('¿Desea reportar este anuncio?')"/>
         </div>
         <div style="margin: 5px">
-                    <asp:Button CssClass="btn btn-secondary searchButton" type="button" ID="favButton" Text="Añadir a favoritos" runat="server" OnClick="addToFav"/>
+                    <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="favButton" Text="Añadir a favoritos" runat="server" OnClick="addToFav"/>
             </div>
     </div>
 
