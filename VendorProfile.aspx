@@ -5,8 +5,11 @@
     <div class="justify-content-md-center mb-2 border rounded">
         <p style="margin: 5px">Nombre: <%= Session["profileName"] %> <br/></p>
         <p style="margin: 5px">Teléfono: <%= Session["profileTel"] %> <br/> </p>
-        <p style="margin: 5px">Email: <%= Session["profileEmail"] %> <br/></p>
-        
+        <p style="margin: 5px">Email: <%= Session["profileEmail"] %> <br/></p>       
+    </div>
+
+    <div class="row justify-content-md-center mb-2">
+        <asp:Button CssClass="btn btn-primary" type="button" ID="contactButton" Text="Contactar con el usuario" runat="server"/>
     </div>
     <div>
         <div class="text-center">
