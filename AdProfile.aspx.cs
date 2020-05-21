@@ -75,6 +75,7 @@ namespace Sharefy_MDA
             var carID = Request.QueryString["car_id"];
             if (carID == null) Response.Redirect("/ListAds.aspx");
             fillData("select * from Coches Where ID ='" + carID + "'");
+            fillComments("select * from Valoracion Where IDCoche ='" + carID + "'");
         }
 
         protected void fillData(string query)
@@ -172,6 +173,104 @@ namespace Sharefy_MDA
                 }
 
                 Car_data.InnerHtml = deck;
+                db.Close();
+            }
+        }
+
+        protected void fillComments(string sql)
+        {
+            var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+            var connstring = "data source=" + relativeRoute;
+            var deck = "";
+            using (var db = new SQLiteConnection(connstring))
+            {
+                db.Open();
+                using (var cmd = new SQLiteCommand(sql, db))
+                {
+                    var reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        var comentario = "";
+                        var carID = 0;
+                        var userID = 0;
+                        var val = 0;
+                        for (var i = 0; i < reader.FieldCount; i++)
+                            if (!reader.IsDBNull(i))
+                            {
+                                if (reader.GetName(i).Equals("ID")) continue;
+                                if (reader.GetName(i).Equals("IDUsuario"))
+                                {
+                                    userID = reader.GetInt32(i);
+                                    continue;
+                                }
+
+                                if (reader.GetName(i).Equals("IDCoche"))
+                                {
+                                    carID = reader.GetInt32(i);
+                                    continue;
+                                }
+
+                                if (reader.GetName(i).Equals("Valoracion"))
+                                {
+                                    val = reader.GetInt32(i);
+                                    continue;
+                                }
+
+                                if (reader.GetName(i).Equals("Comentario")) comentario = reader.GetString(i);
+                            }
+
+                        deck += showComments(getUserName("" + userID), carID, val, comentario);
+                    }
+                }
+
+                commments.InnerHtml = deck;
+                db.Close();
+            }
+        }
+
+        protected string showComments(string name, int idCar, int val, string com)
+        {
+            return "<div class=\"my-2 mx-auto p-relative bg-white\" style=\"width: 720px;\">"
+                   + "</h1><p class=\"mb-1\"><b>" + name + "</b></p>"
+                   + "<div class=\"row\">"
+                   + "<div class=\"col-sm-11\">" + com + "</div>"
+                   + "<div class=\"col-sm-3\"> Valoración: " + val + "</div>"
+                   + "</div>"
+                   + "</div>";
+        }
+
+        protected void addCommentary(object sender, EventArgs e)
+        {
+            var comment = commentary.Value;
+            var val = valoration.Value;
+            var id = Session["id"].ToString();
+            var carID = Request.QueryString["car_id"];
+            var sql = "insert into Valoracion (IDUsuario, IDCoche, Valoracion, Comentario) values ('" + id + "','" +
+                      carID + "',\"" + val + "\",\"" + comment + "\")";
+            addComment(sql);
+            fillComments("select * from Valoracion Where IDCoche ='" + carID + "'");
+        }
+
+        protected void addComment(string sql)
+        {
+            var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+            var connstring = "data source=" + relativeRoute;
+            using (var db = new SQLiteConnection(connstring))
+            {
+                db.Open();
+                using (var cmd = new SQLiteCommand(sql, db))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        Console.WriteLine("COMENTARIO Y VALORACIÓN AÑADIDOS");
+                    }
+                    catch
+                    {
+                        Console.WriteLine("NO SE PUDO ENVIAR LA VALORACIÓN ");
+                    }
+                }
+
                 db.Close();
             }
         }
