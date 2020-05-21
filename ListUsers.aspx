@@ -29,6 +29,11 @@
                 <asp:BoundField DataField="Tel" HeaderText="Teléfono" />
                 <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:BoundField DataField="Rol" HeaderText="Rol" />
+                <asp:TemplateField HeaderText="Ver" SortExpression="">
+                    <ItemTemplate>
+                        <asp:LinkButton CssClass="btn UserManagerbtn" ID="LinkButtonView" runat="server" CommandName="ViewUser" CommandArgument='<%#Eval("ID") %>'>Ver</asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Editar" SortExpression="">
                     <ItemTemplate>
                         <asp:LinkButton CssClass="btn UserManagerbtn" ID="LinkButtonEdit" runat="server" CommandName="EditUser" CommandArgument='<%#Eval("ID") %>'>Edit</asp:LinkButton>

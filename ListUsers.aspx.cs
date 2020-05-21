@@ -50,6 +50,14 @@ namespace Sharefy_MDA
                 var id = GridViewData.DataKeys[row.RowIndex].Value.ToString();
                 string url = "~/ProfileMod.aspx?id=" + id;
                 Response.Redirect(url);
+            } 
+            else if (e.CommandName == "ViewUser")
+            {
+                LinkButton button = (LinkButton)e.CommandSource;
+                GridViewRow row = (GridViewRow)button.NamingContainer;
+                var id = GridViewData.DataKeys[row.RowIndex].Value.ToString();
+                string url = "~/ProfileViewer.aspx?id=" + id;
+                Response.Redirect(url);
             }
             else if (e.CommandName == "DeleteUser")
             {
