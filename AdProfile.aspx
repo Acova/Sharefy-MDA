@@ -73,4 +73,18 @@
 
     </div>
 
+    <div class="row " id="commments" runat="server"></div>
+
+    <div class="row justify-content-md-center mb-2">
+        <div>
+            <input id="commentary" type="text" class="form-control" runat="server" style="margin: 5px; padding: 5px"/>
+        </div>
+        <div>
+            <input id="valoration" type="number" min="0" max="10" class="form-control" runat="server" style="margin: 5px"/>
+        </div>
+
+        <asp:Button CssClass="btn btn-primary searchButton" type="button" ID="Button1" Text="Añadir Comentario" runat="server" OnClick="addCommentary"/>
+
+    </div>
+
 </asp:Content>
