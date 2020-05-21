@@ -9,7 +9,7 @@
     </div>
 
     <div class="row justify-content-md-center mb-2">
-        <asp:Button CssClass="btn btn-primary" type="button" ID="contactButton" Text="Contactar con el usuario" runat="server"/>
+        <asp:Button CssClass="btn btn-primary" type="button" ID="contactButton" Text='Contactar con el vendedor' runat="server"/>
     </div>
     <div>
         <div class="text-center">
