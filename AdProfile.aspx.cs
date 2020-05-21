@@ -41,6 +41,8 @@ namespace Sharefy_MDA
             dateT.Attributes.Add("max", dateTo);
             reportDone.Visible = false;
             needMoreData.Visible = false;
+            
+            checkFav();
         }
 
         protected void confirmRent(object sender, EventArgs e)
@@ -297,6 +299,39 @@ namespace Sharefy_MDA
             }
         }
 
+
+        public void checkFav()
+        {
+            
+        }
+
+        public void addToFav(object sender, EventArgs e)
+        {
+            var userId = Session["id"].ToString();
+            var carId = Request.QueryString["car_id"];
+
+            var relativeRoute = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+            var connstring = "data source=" + relativeRoute;
+            using (var db = new SQLiteConnection(connstring))
+            {
+                db.Open();
+
+                using (var cmd = new SQLiteCommand("insert into Favoritos(IDUsuario, IDCoche) values (@user, @car)", db))
+                {
+                    try
+                    {
+                        cmd.Parameters.Add("@user", DbType.Int32).Value = userId;
+                        cmd.Parameters.Add("@car", DbType.Int32).Value = carId;
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                    }
+                }
+                db.Close();
+            }
+
+        }
 
     }
 }
