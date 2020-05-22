@@ -269,6 +269,7 @@
     <Content Include="Site.Master" />
     <Content Include="User.aspx" />
     <Content Include="UserConf.aspx" />
+    <Content Include="UserMessages.aspx" />
     <Content Include="UserRegister.aspx" />
     <Content Include="VendorProfile.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -407,6 +408,13 @@
     </Compile>
     <Compile Include="UserConf.aspx.designer.cs">
       <DependentUpon>UserConf.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserMessages.aspx.cs">
+      <DependentUpon>UserMessages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserMessages.aspx.designer.cs">
+      <DependentUpon>UserMessages.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserRegister.aspx.cs">
       <DependentUpon>UserRegister.aspx</DependentUpon>
