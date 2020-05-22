@@ -58,6 +58,9 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" id="messagesLink" runat="server">
+                        <a class="nav-link" href="UserMessages">Mensajes</a>
+                    </li>
                     <li class="nav-item" id="registerLink" runat="server">
                         <a class="nav-link" href="UserRegister">¿No tienes cuenta?</a>
                     </li>
