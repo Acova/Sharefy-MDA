@@ -24,7 +24,7 @@
                             runat="server"
                             CommandName="SeeMessage"
                             CommandArgument='<%#Eval("ID") %>'
-                            >Ver mensaje
+                            >Ver mensaje 
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
