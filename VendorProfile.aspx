@@ -9,8 +9,33 @@
     </div>
 
     <div class="row justify-content-md-center mb-2">
-        <asp:Button CssClass="btn btn-primary" type="button" ID="contactButton" Text='Contactar con el vendedor' runat="server"/>
+        <asp:Button CssClass="btn btn-primary" type="button" OnClick="showDialog" ID="contactButton" Text='Contactar con el vendedor' runat="server"/>
     </div>
+
+    <div class="row justify-content-md-center mb-2">
+        <h5 id="messageTitleLabel" runat="server" visible="false">Título del mensaje</h5>
+        <input 
+            id="messageTitleInput"
+            type="text"
+            class="form-control mx-2"
+            placeholder="Título"
+            runat="server"
+            visible="false"
+            required />
+    </div>
+
+    <div class="row justify-content-md-center mb-2">
+        <h5 id="messageBodyLabel" runat="server" visible="false">Contenido del mensaje</h5>
+    </div>
+
+    <div class="row justify-content-md-center mb-2">
+        <textarea rows="5" cols="40" id="messageBodyInput" runat="server" visible="false" required />
+    </div>
+
+    <div class="row justify-content-md-center mb-2">
+        <asp:Button CssClass="btn btn-info" type="button" OnClick="sendMessage" ID="messageSubmitButton" Text='Enviar' runat="server" Visible="false" />
+    </div>
+    
     <div>
         <div class="text-center">
             Lista de anuncios
