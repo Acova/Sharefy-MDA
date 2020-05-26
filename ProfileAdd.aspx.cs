@@ -12,7 +12,6 @@ namespace Sharefy_MDA
     {
 
         private string _dni;
-        private int _dniNumer;
         private string _password;
         private string _repeatedPassword;
         private string _name;
@@ -59,7 +58,7 @@ namespace Sharefy_MDA
                 {
                     try
                     {
-                        cmd.Parameters.Add("@Dni", DbType.Int32).Value = _dniNumer;
+                        cmd.Parameters.Add("@Dni", DbType.String).Value = _dni;
                         cmd.Parameters.Add("@Password", DbType.String).Value = _password;
                         cmd.Parameters.Add("@Name", DbType.String).Value = _name;
                         cmd.Parameters.Add("@Account", DbType.String).Value = _accountName;
@@ -142,7 +141,6 @@ namespace Sharefy_MDA
                 var letter = id.Substring(id.Length - 1, 1);
                 id = id.Substring(0, id.Length - 1);
                 var number = int.Parse(id);
-                _dniNumer = number; 
                 var rem = number % 23;
                 var tmp = getLetter(rem);
                 if (tmp.ToLower() != letter.ToLower())
