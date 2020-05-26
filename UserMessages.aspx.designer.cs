@@ -15,21 +15,39 @@ namespace Sharefy_MDA
     {
 
         /// <summary>
-        /// Control mensajes.
+        /// Control sentMessages.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl mensajes;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sentMessages;
 
         /// <summary>
-        /// Control MessagesGridView.
+        /// Control SentMessagesGridView.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView MessagesGridView;
+        protected global::System.Web.UI.WebControls.GridView SentMessagesGridView;
+
+        /// <summary>
+        /// Control receivedMessages.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl receivedMessages;
+
+        /// <summary>
+        /// Control ReceivedMessagesGridView.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ReceivedMessagesGridView;
     }
 }

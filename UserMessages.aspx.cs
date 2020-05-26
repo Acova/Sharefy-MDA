@@ -33,18 +33,30 @@ namespace Sharefy_MDA
             using(var db = new SQLiteConnection(connectionString))
             {
                 db.Open();
-                DataTable messageDataTable = new DataTable();
+                DataTable sentMessageDataTable = new DataTable();
                 var cmd = new SQLiteCommand(
+                    "SELECT Mensajes_Usuario.ID, Mensajes_Usuario.IDEmisor, Mensajes_Usuario.Titulo, Mensajes_Usuario.Cuerpo, Mensajes_Usuario.Fecha_envio, Mensajes_Usuario.Estado, Usuarios.Cuenta " +
+                    "FROM Mensajes_Usuario " +
+                    "INNER JOIN Usuarios ON Mensajes_Usuario.IDEmisor=Usuarios.ID " +
+                    "WHERE Mensajes_Usuario.IDEmisor=" + Session["id"], db);
+                cmd.CommandType = CommandType.Text;
+                SQLiteDataAdapter sentMessageDataAdapter = new SQLiteDataAdapter(cmd);
+                sentMessageDataAdapter.Fill(sentMessageDataTable);
+                SentMessagesGridView.DataSource = sentMessageDataTable;
+                SentMessagesGridView.DataBind();
+
+                DataTable receivedMessageDataTable = new DataTable();
+                cmd = new SQLiteCommand(
                     "SELECT Mensajes_Usuario.ID, Mensajes_Usuario.IDEmisor, Mensajes_Usuario.Titulo, Mensajes_Usuario.Cuerpo, Mensajes_Usuario.Fecha_envio, Mensajes_Usuario.Estado, Usuarios.Cuenta " +
                     "FROM Mensajes_Usuario " +
                     "INNER JOIN Usuarios ON Mensajes_Usuario.IDEmisor=Usuarios.ID " +
                     "WHERE Mensajes_Usuario.IDReceptor=" + Session["id"], db);
                 cmd.CommandType = CommandType.Text;
-                SQLiteDataAdapter messageDataAdapter = new SQLiteDataAdapter(cmd);
-                messageDataAdapter.Fill(messageDataTable);
-                MessagesGridView.DataSource = messageDataTable;
-                MessagesGridView.DataBind();
-                                
+                SQLiteDataAdapter receivedMessageDataAdapter = new SQLiteDataAdapter(cmd);
+                receivedMessageDataAdapter.Fill(receivedMessageDataTable);
+                ReceivedMessagesGridView.DataSource = receivedMessageDataTable;
+                ReceivedMessagesGridView.DataBind();
+
                 db.Close();
             }
         }
