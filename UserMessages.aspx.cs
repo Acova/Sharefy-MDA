@@ -22,7 +22,25 @@ namespace Sharefy_MDA
 
         protected void loadMessage(object sender, GridViewCommandEventArgs e)
         {
-
+            if(e.CommandName == "SeeSentMessage")
+            {
+                LinkButton button = (LinkButton)e.CommandSource;
+                GridViewRow row = (GridViewRow)button.NamingContainer;
+                var id = SentMessagesGridView.DataKeys[row.RowIndex].Value.ToString();
+                var str = "/MessageDetail.aspx?message_id=" + id;
+                Response.Redirect(str);
+            }
+            else
+            {
+                if(e.CommandName == "SeeReceivedMessage")
+                {
+                    LinkButton button = (LinkButton)e.CommandSource;
+                    GridViewRow row = (GridViewRow)button.NamingContainer;
+                    var id = ReceivedMessagesGridView.DataKeys[row.RowIndex].Value.ToString();
+                    var str = "/MessageDetail.aspx?message_id=" + id;
+                    Response.Redirect(str);
+                }
+            }
         }
 
         protected void fetchData()
@@ -60,5 +78,7 @@ namespace Sharefy_MDA
                 db.Close();
             }
         }
+
+
     }
 }

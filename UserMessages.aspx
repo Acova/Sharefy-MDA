@@ -22,7 +22,7 @@
                             CssClass="btn btn-primary"
                             ID="LinkButtonSeeSentMessage"
                             runat="server"
-                            CommandName="SeeMessage"
+                            CommandName="SeeSentMessage"
                             CommandArgument='<%#Eval("ID") %>'
                             >Ver mensaje 
                         </asp:LinkButton>
@@ -54,7 +54,7 @@
                             CssClass="btn btn-primary"
                             ID="LinkButtonSeeMessage"
                             runat="server"
-                            CommandName="SeeMessage"
+                            CommandName="SeeReceivedMessage"
                             CommandArgument='<%#Eval("ID") %>'
                             >Ver mensaje 
                         </asp:LinkButton>

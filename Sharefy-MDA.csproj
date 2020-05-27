@@ -141,6 +141,7 @@
     <Content Include="ListCar.aspx" />
     <Content Include="ListUsers.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MessageDetail.aspx" />
     <Content Include="ProfileAdd.aspx" />
     <Content Include="ProfileMod.aspx" />
     <Content Include="ProfileViewer.aspx" />
@@ -352,6 +353,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MessageDetail.aspx.cs">
+      <DependentUpon>MessageDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MessageDetail.aspx.designer.cs">
+      <DependentUpon>MessageDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProfileAdd.aspx.cs">
       <DependentUpon>ProfileAdd.aspx</DependentUpon>
