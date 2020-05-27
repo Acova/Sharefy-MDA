@@ -27,7 +27,6 @@ namespace Sharefy_MDA
         {
             var route = HttpContext.Current.Server.MapPath(@"\BDCoches.db");
             var connnectionString = "data source=" + route;
-            var deck = "";
 
             using (var db = new SQLiteConnection(connnectionString))
             {
