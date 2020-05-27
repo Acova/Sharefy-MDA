@@ -29,7 +29,7 @@
     </div>
 
     <div class="row justify-content-md-center mb-2">
-        <textarea rows="5" cols="40" id="messageBodyInput" runat="server" visible="false" required />
+        <textarea style="max-width: none" rows="10" cols="60" id="messageBodyInput" runat="server" visible="false" required />
     </div>
 
     <div class="row justify-content-md-center mb-2">
