@@ -17,7 +17,7 @@
                 <asp:BoundField DataField="Fecha_envio" HeaderText="Fecha de envío" />
                 <asp:BoundField DataField="Estado" HeaderText="Estado" />
                 <asp:TemplateField HeaderText="Ver Mensaje" SortExpression="">
-                    <ItemTemplate>
+                    <ItemTemplate> 
                         <asp:LinkButton
                             CssClass="btn btn-primary"
                             ID="LinkButtonSeeSentMessage"
