@@ -113,4 +113,39 @@
             </Columns>
         </asp:GridView>
     </div>
+    
+    
+    <h2 class="text-center">Lista de favoritos</h2>
+        <div class="row grid" id="favoritos" runat="server">
+            <asp:GridView 
+                CssClass="table" 
+                ID="FavGridViewData" 
+                runat="server" 
+                AutoGenerateColumns="false" 
+                DataKeyNames="id" 
+                OnRowCommand="FavGridViewData_RowCommand">
+                <Columns>
+                    <asp:BoundField DataField="ID" HeaderText="ID" Visible="false" />
+                    <asp:BoundField DataField="Marca" HeaderText="Marca" />
+                    <asp:BoundField DataField="Matricula" HeaderText="Matricula" />
+                    <asp:BoundField DataField="Datos" HeaderText="Datos" />
+                    <asp:BoundField DataField="Inicio" HeaderText="Inicio" />
+                    <asp:BoundField DataField="Fin" HeaderText="Fin" />
+                    <asp:TemplateField HeaderText="Eliminar" SortExpression="">
+                        <ItemTemplate>
+                            <asp:LinkButton
+                                CssClass="btn btn-danger"
+                                ID="LinkButtonDeleteAdd"
+                                runat="server"
+                                CommandName="DeleteCar"
+                                CommandArgument='<%#Eval("ID") %>'
+                                OnClientClick="return confirm('¿Desea eliminar este coche de favoritos?')">
+                                Eliminar
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
+        </div>
+    
 </asp:Content>
