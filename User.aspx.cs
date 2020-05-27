@@ -82,7 +82,17 @@ namespace Sharefy_MDA
                 rentDataAdapter.Fill(rentDataTable);
                 RentGridViewData.DataSource = rentDataTable;
                 RentGridViewData.DataBind();
+                
+                DataTable favDataTable = new DataTable();
+                cmd = new SQLiteCommand("SELECT Coches.ID, Coches.Datos, Coches.Inicio, Coches.Fin, Coches.Marca, Coches.Matricula FROM Coches INNER JOIN Favoritos ON Favoritos.IDCoche=Coches.ID WHERE Favoritos.IDUsuario=" + Session["id"], db);
+                cmd.CommandType = CommandType.Text;
+                SQLiteDataAdapter favDataAdapter = new SQLiteDataAdapter(cmd);
+                favDataAdapter.Fill(favDataTable);
+                FavGridViewData.DataSource = favDataTable;
+                FavGridViewData.DataBind();
+                
                 db.Close();
+
             }
         }
 
@@ -161,6 +171,27 @@ namespace Sharefy_MDA
                 {
                     db.Open();
                     var cmd = new SQLiteCommand("DELETE FROM Coches WHERE ID=" + id, db);
+                    cmd.ExecuteReader();
+                    db.Close();
+                }
+                fetchUserData();
+            }
+        }
+
+
+        protected void FavGridViewData_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "DeleteCar")
+            {
+                LinkButton button = (LinkButton)e.CommandSource;
+                GridViewRow row = (GridViewRow)button.NamingContainer;
+                var id = FavGridViewData.DataKeys[row.RowIndex].Value.ToString();
+                var route = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+                var str = "data source=" + route;
+                using (var db = new SQLiteConnection(str))
+                {
+                    db.Open();
+                    var cmd = new SQLiteCommand("DELETE FROM Favoritos WHERE IDCoche=" + id + " AND IDUsuario="+ Session["id"], db);
                     cmd.ExecuteReader();
                     db.Close();
                 }
