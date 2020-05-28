@@ -30,16 +30,30 @@ namespace Sharefy_MDA
                 var str = "/MessageDetail.aspx?message_id=" + id;
                 Response.Redirect(str);
             }
-            else
+            if(e.CommandName == "SeeReceivedMessage")
             {
-                if(e.CommandName == "SeeReceivedMessage")
+                LinkButton button = (LinkButton)e.CommandSource;
+                GridViewRow row = (GridViewRow)button.NamingContainer;
+                var id = ReceivedMessagesGridView.DataKeys[row.RowIndex].Value.ToString();
+                var str = "/MessageDetail.aspx?message_id=" + id;
+                Response.Redirect(str);
+            }
+            if(e.CommandName == "DeleteReceivedMessage")
+            {
+                LinkButton button = (LinkButton)e.CommandSource;
+                GridViewRow row = (GridViewRow)button.NamingContainer;
+                var id = ReceivedMessagesGridView.DataKeys[row.RowIndex].Value.ToString();
+                var route = HttpContext.Current.Server.MapPath(@"\BDCoches.db");
+                var connectionString = "data source=" + route;
+
+                using (var db = new SQLiteConnection(connectionString))
                 {
-                    LinkButton button = (LinkButton)e.CommandSource;
-                    GridViewRow row = (GridViewRow)button.NamingContainer;
-                    var id = ReceivedMessagesGridView.DataKeys[row.RowIndex].Value.ToString();
-                    var str = "/MessageDetail.aspx?message_id=" + id;
-                    Response.Redirect(str);
+                    db.Open();
+                    var cmd = new SQLiteCommand("DELETE FROM Mensajes_Usuario WHERE ID = " + id, db);
+                    cmd.ExecuteReader();
+                    db.Close();
                 }
+                fetchData();
             }
         }
 
@@ -53,9 +67,9 @@ namespace Sharefy_MDA
                 db.Open();
                 DataTable sentMessageDataTable = new DataTable();
                 var cmd = new SQLiteCommand(
-                    "SELECT Mensajes_Usuario.ID, Mensajes_Usuario.IDEmisor, Mensajes_Usuario.Titulo, Mensajes_Usuario.Cuerpo, Mensajes_Usuario.Fecha_envio, Mensajes_Usuario.Estado, Usuarios.Cuenta " +
+                    "SELECT Mensajes_Usuario.ID, Mensajes_Usuario.IDEmisor, Mensajes_Usuario.Titulo, Mensajes_Usuario.Cuerpo, Mensajes_Usuario.Fecha_envio, Mensajes_Usuario.Estado, Usuarios.NombreCompleto " +
                     "FROM Mensajes_Usuario " +
-                    "INNER JOIN Usuarios ON Mensajes_Usuario.IDEmisor=Usuarios.ID " +
+                    "INNER JOIN Usuarios ON Mensajes_Usuario.IDReceptor=Usuarios.ID " +
                     "WHERE Mensajes_Usuario.IDEmisor=" + Session["id"], db);
                 cmd.CommandType = CommandType.Text;
                 SQLiteDataAdapter sentMessageDataAdapter = new SQLiteDataAdapter(cmd);
@@ -65,7 +79,7 @@ namespace Sharefy_MDA
 
                 DataTable receivedMessageDataTable = new DataTable();
                 cmd = new SQLiteCommand(
-                    "SELECT Mensajes_Usuario.ID, Mensajes_Usuario.IDEmisor, Mensajes_Usuario.Titulo, Mensajes_Usuario.Cuerpo, Mensajes_Usuario.Fecha_envio, Mensajes_Usuario.Estado, Usuarios.Cuenta " +
+                    "SELECT Mensajes_Usuario.ID, Mensajes_Usuario.IDEmisor, Mensajes_Usuario.Titulo, Mensajes_Usuario.Cuerpo, Mensajes_Usuario.Fecha_envio, Mensajes_Usuario.Estado, Usuarios.NombreCompleto " +
                     "FROM Mensajes_Usuario " +
                     "INNER JOIN Usuarios ON Mensajes_Usuario.IDEmisor=Usuarios.ID " +
                     "WHERE Mensajes_Usuario.IDReceptor=" + Session["id"], db);

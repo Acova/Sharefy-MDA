@@ -66,6 +66,18 @@ namespace Sharefy_MDA
                         }
                     }
                 }
+
+                using (cmd = new SQLiteCommand("UPDATE Mensajes_Usuario SET Estado = \"Leido\" WHERE ID = " + messageID, db))
+                {
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        System.Diagnostics.Debug.WriteLine("Error actualizando el mensaje");
+                    }
+                }
                 db.Close();
             }
         }
