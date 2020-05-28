@@ -12,7 +12,7 @@ namespace Sharefy_MDA
     public partial class MessageDetail : System.Web.UI.Page
     {
         string messageID;
-        int id;
+        int idReceptor;
         protected void Page_Load(object sender, EventArgs e)
         {
             messageID = Request.QueryString["message_id"];
@@ -61,7 +61,7 @@ namespace Sharefy_MDA
                             }
                             if (reader.GetName(i).Equals("IDEmisor"))
                             {
-                                id = reader.GetInt32(i);
+                                idReceptor = reader.GetInt32(i);
                             }
                         }
                     }
@@ -88,6 +88,7 @@ namespace Sharefy_MDA
                         {
                             if(reader.GetInt32(i) == Int32.Parse(Session["id"].ToString()))
                             {
+                                reader.Close();
                                 db.Close();
                                 return true;
                             }
@@ -99,7 +100,7 @@ namespace Sharefy_MDA
             return false;
         }
 
-        protected void showDialog(object sender, EventArgs e)
+        protected void answerMessage(object sender, EventArgs e)
         {
             messageTitleLabel.Visible = true;
             messageTitleInput.Visible = true;
@@ -110,33 +111,26 @@ namespace Sharefy_MDA
 
         protected void sendMessage(object sender, EventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine(buildQuery());
-
-            var route = HttpContext.Current.Server.MapPath(@"\BDcoches.db");
+            var route = HttpContext.Current.Server.MapPath(@"\BDCoches.db");
             var connstring = "data source=" + route;
-            using (var db = new SQLiteConnection(connstring))
+
+            using(var db = new SQLiteConnection(connstring))
             {
                 db.Open();
-                var cmd = new SQLiteCommand(buildQuery(), db);
+                var cmd = new SQLiteCommand(
+                    "INSERT INTO Mensajes_Usuario (IDEmisor, IDReceptor, Titulo, Cuerpo, Fecha_envio, Estado) " +
+                    "values (" +
+                    "\"" + Session["id"] + "\", " +
+                    "\"" + idReceptor + "\", " +
+                    "\"" + messageTitleInput.Value + "\", " +
+                    "\"" + messageBodyInput.Value + "\", " +
+                    "\"" + DateTime.Today.ToString("yyyy-MM-dd") + "\", " +
+                    "\"Enviado\"" + ")", db);
                 cmd.ExecuteNonQuery();
                 db.Close();
             }
 
-            Response.Redirect("/UserMessages.aspx");
-        }
-
-        protected string buildQuery()
-        {
-            var str =
-                "INSERT INTO Mensajes_Usuario (IDEmisor, IDReceptor, Titulo, Cuerpo, Fecha_envio, Estado) " +
-                "values ("
-                + "\"" + Session["id"] + "\", "
-                + "\"" + id.ToString() + "\", "
-                + "\"" + messageTitleInput.Value + "\", "
-                + "\"" + messageBodyInput.Value + "\", "
-                + "\"" + DateTime.Today.ToString("yyyy-MM-dd") + "\", "
-                + "\"Enviado\"" + ")";
-            return str;
+            Response.Redirect("/UserMessages");
         }
     }
 }
