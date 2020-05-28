@@ -12,7 +12,7 @@
             >
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" Visible="false" />
-                <asp:BoundField DataField="Cuenta" HeaderText="Emisor" />
+                <asp:BoundField DataField="NombreCompleto" HeaderText="Receptor" />
                 <asp:BoundField DataField="Titulo" HeaderText="Título" />
                 <asp:BoundField DataField="Fecha_envio" HeaderText="Fecha de envío" />
                 <asp:BoundField DataField="Estado" HeaderText="Estado" />
@@ -44,7 +44,7 @@
             >
             <Columns>
                 <asp:BoundField DataField="ID" HeaderText="ID" Visible="false" />
-                <asp:BoundField DataField="Cuenta" HeaderText="Emisor" />
+                <asp:BoundField DataField="NombreCompleto" HeaderText="Emisor" />
                 <asp:BoundField DataField="Titulo" HeaderText="Título" />
                 <asp:BoundField DataField="Fecha_envio" HeaderText="Fecha de envío" />
                 <asp:BoundField DataField="Estado" HeaderText="Estado" />
@@ -57,6 +57,18 @@
                             CommandName="SeeReceivedMessage"
                             CommandArgument='<%#Eval("ID") %>'
                             >Ver mensaje 
+                        </asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Borrar Mensaje" SortExpression="">
+                    <ItemTemplate>
+                        <asp:LinkButton
+                            CssClass="btn btn-danger"
+                            ID="LinkButtonDeleteMessage"
+                            runat="server"
+                            CommandName="DeleteReceivedMessage"
+                            CommandArgument='<%#Eval("ID") %>'
+                            >Eliminar Mensaje
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
