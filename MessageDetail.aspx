@@ -29,7 +29,7 @@
         </div>
 
         <div class="row justify-content-md-center mb-2">
-            <asp:Button CssClass="btn btn-primary" type="button" OnClick="showDialog" ID="contactButton" Text='Responder' runat="server"/>
+            <asp:Button CssClass="btn btn-primary" type="button" OnClick="answerMessage" ID="contactButton" Text='Responder' runat="server"/>
         </div>
 
         <div class="row justify-content-md-center mb-2">
